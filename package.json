@@ -32,12 +32,13 @@
     "list-skills": "chmod +x scripts/list-skills.sh && sh scripts/list-skills.sh",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
     "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
+    "==================================================": "==================================================",
     "init": "changeset init",
     "changeset": "changeset",
     "version": "changeset version",
     "status": "changeset status --verbose",
     "release": "changeset publish",
-    "release:tag": "changeset tag"
+    "tag": "changeset tag"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",

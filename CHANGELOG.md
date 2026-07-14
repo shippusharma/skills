@@ -11,12 +11,15 @@ All notable changes to this project are documented in this file.
 - Added Claude plugin support.
 - Added GitHub Actions workflow for automated CI/CD.
 
-### Improved
+### Changed
 
+- Updated package keywords.
 - Improved project documentation.
-- Enhanced README with clearer installation and usage instructions.
-- Added a `SECURITY.md` policy for responsible vulnerability reporting.
-- Updated package keywords to improve discoverability on npm.
+- renamed some project scripts.
+
+### Security
+
+- Added `SECURITY.md` with vulnerability reporting guidelines.
 
 ---
 

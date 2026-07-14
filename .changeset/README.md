@@ -50,5 +50,5 @@ npm run release
 
 ```bash
 # tag releases(Create git tags)
-npm run release:tag
+npm run tag
 ```
