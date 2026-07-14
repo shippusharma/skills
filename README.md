@@ -9,6 +9,10 @@ This repository contains a collection of reusable agent skills for AI-assisted d
 Install a skill:
 
 ```bash
+# Install all available skills
+npx skills add shippusharma/skills
+
+# Install a specific skill
 npx skills add https://github.com/shippusharma/skills --skill <skill-name>
 ```
 
@@ -22,7 +26,7 @@ npx skills add https://github.com/shippusharma/skills --skill mvp-builder
 
 # Product Development
 
-## mvp-builder
+## 1. mvp-builder
 
 Build a production-ready MVP from an idea with a strong focus on:
 
@@ -58,7 +62,7 @@ npx skills add https://github.com/shippusharma/skills --skill mvp-builder
 
 ---
 
-## project-blueprint-builder
+## 2. project-blueprint-builder
 
 Generate a complete implementation blueprint before writing code.
 
