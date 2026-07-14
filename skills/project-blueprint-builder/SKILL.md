@@ -1,7 +1,11 @@
 ---
 name: project-blueprint-builder
 description: 'Use when planning or starting any software product, feature, app, or internal tool. Produces a complete implementation blueprint with PRD, architecture, rules, phases, design, and memory documents.'
-version: 1.3.0
+license: Apache-2.0
+metadata:
+  version: 1.0.0
+  author: shippu sharma
+  email: shippusharma00@gmail.com
 ---
 
 # Project Blueprint Builder

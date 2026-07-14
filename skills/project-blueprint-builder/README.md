@@ -32,4 +32,4 @@ To publish this package on GitHub:
 
 ## License
 
-This package is licensed under the MIT License.
+This package is licensed under the Apache-2.0 License.

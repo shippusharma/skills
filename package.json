@@ -4,7 +4,11 @@
   "description": "Shippu Sharma agent skills for real engineering and developers.",
   "private": true,
   "keywords": [
-    "node"
+    "skills",
+    "agents",
+    "agent-skills",
+    "AI",
+    "project-blueprint-builder-skill"
   ],
   "author": {
     "name": "Shippu Sharma",
@@ -20,7 +24,6 @@
     "url": "https://github.com/shippusharma/skills/issues"
   },
   "homepage": "https://github.com/shippusharma/skills#readme",
-  "packageManager": "npm@11.16.0",
   "scripts": {
     "cleanup": "rm -rf node_modules .huksy",
     "list-skills": "chmod +x scripts/list-skills.sh && sh scripts/list-skills.sh",
@@ -33,5 +36,6 @@
     "@changesets/changelog-github": "^0.7.0",
     "@changesets/cli": "^2.31.0",
     "prettier": "^3.9.5"
-  }
+  },
+  "packageManager": "npm@11.16.0"
 }
