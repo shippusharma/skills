@@ -1,0 +1,16 @@
+node_modules
+*.tsbuildinfo
+build
+dist
+.husky
+
+# env variables
+.env*
+
+# Local editor files
+.DS_Store
+.vscode/
+
+# Temporary files
+*.tmp
+*.log

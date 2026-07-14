@@ -1,0 +1,24 @@
+# top-most EditorConfig file
+root = true
+
+# Default settings for all files
+[*]
+indent_style = space      # Prettier uses spaces, not tabs
+indent_size = 2           # Matches Prettier tabWidth
+end_of_line = lf          # Normalize line endings (Linux/macOS style)
+charset = utf-8           # Character encoding
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Markdown: preserve trailing whitespace for correct formatting
+[*.md]
+trim_trailing_whitespace = false
+
+# JSON, YAML: Prettier also formats these, so keep whitespace trimmed
+[*.{json,yml,yaml}]
+indent_size = 2
+trim_trailing_whitespace = true
+
+# Makefile: Tabs are required
+[Makefile]
+indent_style = tab

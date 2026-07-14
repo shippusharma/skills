@@ -1,0 +1,37 @@
+{
+  "name": "shippusharma-skills",
+  "version": "1.0.0",
+  "description": "Shippu Sharma agent skills for real engineering and developers.",
+  "private": true,
+  "keywords": [
+    "node"
+  ],
+  "author": {
+    "name": "Shippu Sharma",
+    "email": "shippusharma00@gmail.com",
+    "url": "https://github.com/shippusharma"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shippusharma/skills.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shippusharma/skills/issues"
+  },
+  "homepage": "https://github.com/shippusharma/skills#readme",
+  "packageManager": "npm@11.16.0",
+  "scripts": {
+    "cleanup": "rm -rf node_modules .huksy",
+    "list-skills": "chmod +x scripts/list-skills.sh && sh scripts/list-skills.sh",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
+    "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
+    "changeset": "changeset",
+    "version": "changeset version"
+  },
+  "devDependencies": {
+    "@changesets/changelog-github": "^0.7.0",
+    "@changesets/cli": "^2.31.0",
+    "prettier": "^3.9.5"
+  }
+}
