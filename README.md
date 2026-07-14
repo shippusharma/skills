@@ -1,6 +1,96 @@
-# Skills
+# Agent Skills
 
 This repository contains a collection of reusable agent skills for AI-assisted development. Each skill is packaged as a self-contained folder with a SKILL.md file and can be used to guide an assistant through a specific workflow.
+
+---
+
+## Installation
+
+Install a skill:
+
+```bash
+npx skills add https://github.com/shippusharma/skills --skill <skill-name>
+```
+
+Example:
+
+```bash
+npx skills add https://github.com/shippusharma/skills --skill mvp-builder
+```
+
+---
+
+# Product Development
+
+## mvp-builder
+
+Build a production-ready MVP from an idea with a strong focus on:
+
+- Rapid validation
+- Lean architecture
+- Fast development
+- User feedback loops
+- Best stack based on project requirements
+
+### Use when
+
+- You have an idea and want to build it quickly.
+- You need an MVP in days instead of weeks.
+- You're validating a startup idea.
+- You want AI to choose the right architecture.
+
+### Output
+
+- PRD
+- Tech Stack
+- Folder Structure
+- Database Design
+- API Design
+- Development Plan
+- UI Flow
+- MVP Roadmap
+
+### Install
+
+```bash
+npx skills add https://github.com/shippusharma/skills --skill mvp-builder
+```
+
+---
+
+## project-blueprint-builder
+
+Generate a complete implementation blueprint before writing code.
+
+### Use when
+
+- Starting a new project
+- Planning a SaaS
+- Building enterprise software
+- Designing a scalable architecture
+- Working with multiple developers
+
+### Output
+
+- PRD
+- Architecture
+- Coding Rules
+- Folder Structure
+- Database Design
+- API Contracts
+- Security Checklist
+- UI/UX Guidelines
+- Development Phases
+- Memory Documents
+- AI Prompt Files
+
+### Install
+
+```bash
+npx skills add https://github.com/shippusharma/skills --skill project-blueprint-builder
+```
+
+---
 
 ## Available Skills
 
