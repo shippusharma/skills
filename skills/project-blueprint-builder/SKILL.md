@@ -6,6 +6,12 @@ metadata:
   version: 1.0.0
   author: shippu sharma
   email: shippusharma00@gmail.com
+  tags:
+    - planning
+    - blueprint
+    - prd
+    - architecture
+    - design
 ---
 
 # Project Blueprint Builder

@@ -113,3 +113,7 @@ npx skills add https://github.com/shippusharma/skills --skill project-blueprint-
 ## Notes
 
 These skills are intended to be lightweight, reusable, and easy to adapt for different products, teams, and workflows.
+
+## References
+
+[shippusharma-skills](https://github.com/shippusharma/skills)

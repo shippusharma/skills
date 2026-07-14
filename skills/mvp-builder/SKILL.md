@@ -6,6 +6,11 @@ metadata:
   version: 1.0.0
   author: shippu sharma
   email: shippusharma00@gmail.com
+  tags:
+    - prototype
+    - mvp
+    - validation
+    - rapid
 ---
 
 # MVP Builder
