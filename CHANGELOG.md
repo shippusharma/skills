@@ -1,8 +1,16 @@
 # shippusharma-skills
 
-# Changelog
+## 1.0.2
 
-All notable changes to this project are documented in this file.
+### Added
+
+- Added Codex plugin support.
+- Added CONTRIBUTING.md instruction file
+
+### Changed
+
+- Updated README.md file for better readability.
+- Renamed some project scripts.
 
 ## 1.0.1
 

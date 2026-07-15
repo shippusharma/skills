@@ -1,6 +1,6 @@
 {
   "name": "shippusharma-skills",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Shippu Sharma agent skills for real engineering and developers.",
   "private": true,
   "keywords": [
@@ -46,8 +46,5 @@
     "prettier": "^3.9.5"
   },
   "packageManager": "npm@11.16.0",
-  "skills": [
-    "./skills/mvp-builder",
-    "./skills/project-blueprint-builder"
-  ]
+  "skills": "./skills/"
 }

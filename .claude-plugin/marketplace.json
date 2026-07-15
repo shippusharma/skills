@@ -1,4 +1,5 @@
 {
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "shippusharma",
   "description": "Shippu Sharma agent skills for real engineering and developers, as an installable Claude Code plugin.",
   "owner": {
@@ -9,8 +10,8 @@
   "plugins": [
     {
       "name": "shippusharma-skills",
-      "source": "./",
       "description": "Shippu Sharma agent skills for real engineering and developers — mvp-builder, project-blueprint-builder and more.",
+      "source": "./",
       "category": "skills",
       "keywords": [
         "skills",
@@ -21,7 +22,9 @@
         "engineering",
         "mvp-builder",
         "project-blueprint-builder"
-      ]
+      ],
+      "homepage": "https://github.com/shippusharma/skills",
+      "license": "MIT"
     }
   ]
 }

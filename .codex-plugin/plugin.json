@@ -26,5 +26,8 @@
     "url": "https://github.com/shippusharma/skills/issues"
   },
   "homepage": "https://github.com/shippusharma/skills#readme",
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "hooks": {
+    "hooks": {}
+  }
 }

@@ -181,6 +181,11 @@ scripts/
 
 spec/
 └── agent-skills-spec.md
+.claude-plugin/
+└── marketplace.json
+└── plugin.json
+.codex-plugin/
+└── plugin.json
 ```
 
 ---
@@ -221,8 +226,6 @@ If you discover a security vulnerability, please report it responsibly.
 
 📧 **shippusharma00@gmail.com**
 
-Please avoid publicly disclosing vulnerabilities until they have been investigated and resolved.
-
 ---
 
 # Notes
@@ -242,6 +245,12 @@ These skills are designed to be:
 # References
 
 - GitHub Repository: [shippusharma/skills](https://github.com/shippusharma/skills)
+
+---
+
+# License
+
+MIT - Use these skills in your projects, teams, tools, and IDS.
 
 ---
 
