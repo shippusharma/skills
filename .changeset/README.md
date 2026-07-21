@@ -15,40 +15,40 @@ This folder stores release entries that drive Semantic Versioning and changelog 
 
 ```bash
 # create .changeset folder
-npm run init
+npm run semvar:init
 ```
 
 ## Create a release entry
 
 ```bash
 # create a release entry (major/minor/patch)
-npm run changeset
+npm run semvar:changeset
 ```
 
 ## Apply version bumps
 
 ```bash
 # apply version bump + update CHANGELOG.md (Update package versions + changelogs)
-npm run version
+npm run semvar:version
 ```
 
 ## Check release status
 
 ```bash
 # check release status (Preview pending version bumps)
-npm run status
+npm run semvar:status
 ```
 
 ## Publish/tag releases
 
 ```bash
 # publish/tag releases(Publish packages to npm, tag releases on GitHub)
-npm run release
+npm run semvar:release
 ```
 
 ## Tag releases
 
 ```bash
 # tag releases(Create git tags)
-npm run tag
+npm run semvar:tag
 ```

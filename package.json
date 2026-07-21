@@ -1,6 +1,6 @@
 {
   "name": "shippusharma-skills",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Shippu Sharma agent skills for real engineering and developers.",
   "private": true,
   "keywords": [
@@ -33,12 +33,13 @@
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
     "format-check": "prettier --check \"**/*.{js,jsx,ts,tsx,mjs,cjs,css,scss,sass,md,html,json,yml,yaml}\"",
     "==================================================": "==================================================",
-    "init": "changeset init",
-    "changeset": "changeset",
-    "version": "changeset version",
-    "status": "changeset status --verbose",
-    "release": "changeset publish",
-    "tag": "changeset tag"
+    "semvar:init": "changeset init",
+    "semvar:changeset": "changeset",
+    "semvar:version": "changeset version",
+    "semvar:status": "changeset status --verbose",
+    "semvar:release": "changeset publish",
+    "semvar:tag": "changeset tag",
+    "semvar:tag:manually": "VERSION=$(node -p \"require('./package.json').version\") && git tag -a v$VERSION -m \"Release v$VERSION\" && git push origin v$VERSION"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",

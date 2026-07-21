@@ -1,5 +1,12 @@
 # shippusharma-skills
 
+## 1.0.3
+
+### Patch Changes
+
+- feat(skills): added repo-impact-optimizer and skill-quality-reviewer skills
+- chore(package.json): updated scripts command
+
 ## 1.0.2
 
 ### Added
