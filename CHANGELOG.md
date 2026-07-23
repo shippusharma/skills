@@ -1,5 +1,13 @@
 # shippusharma-skills
 
+## 1.0.4
+
+### Patch Changes
+
+- refactor: tighten mvp skill
+- refactor: tighten blueprint skill
+- chore: update repo metadata
+
 ## 1.0.3
 
 ### Patch Changes
