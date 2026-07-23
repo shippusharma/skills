@@ -43,8 +43,8 @@
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.7.0",
-    "@changesets/cli": "^2.31.0",
-    "prettier": "^3.9.5"
+    "@changesets/cli": "^2.31.1",
+    "prettier": "^3.9.6"
   },
   "packageManager": "npm@11.16.0",
   "skills": "./skills/"

@@ -172,8 +172,11 @@ npx skills add https://github.com/shippusharma/skills --skill project-blueprint-
 skills/
 ├── mvp-builder/
 │   └── SKILL.md
-│
 ├── project-blueprint-builder/
+│   └── SKILL.md
+├── repo-impact-optimizer/
+│   └── SKILL.md
+├── skill-quality-reviewer/
 │   └── SKILL.md
 │
 scripts/
