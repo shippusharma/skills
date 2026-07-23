@@ -6,8 +6,8 @@ This skill is designed as a reusable planning package for software projects.
 
 - Use the skill for greenfield product planning.
 - Use it for major feature initiatives and technical handoffs.
-- Adapt the templates to fit your organization’s process.
-- Use it as a starting point for startup, product, or engineering documentation.
+- Adapt the templates to fit the current codebase and team process.
+- Keep the output lean and decision-focused rather than encyclopedic.
 
 ## Notes
 

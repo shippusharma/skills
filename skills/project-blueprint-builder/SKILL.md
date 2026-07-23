@@ -1,98 +1,118 @@
 ---
 name: project-blueprint-builder
-description: 'Use when planning or starting any software product, feature, app, or internal tool. Produces a complete implementation blueprint with PRD, architecture, rules, phases, design, and memory documents.'
+description: 'Creates implementation-ready blueprints for new software products, features, apps, and internal tools. Use when starting a greenfield project, major feature, or technical handoff that needs PRD, TRD, architecture, schema, security, modules, rules, phases, design, and memory docs.'
 license: Apache-2.0
 metadata:
-  version: 1.0.0
+  version: 1.2.0
   author: shippu sharma
   email: shippusharma00@gmail.com
   tags:
     - planning
     - blueprint
-    - prd
+    - product
     - architecture
+    - security
     - design
 ---
 
 # Project Blueprint Builder
 
-## Purpose
+## What it does
 
-Use this skill to turn a rough product idea into a practical blueprint that a team can build from. It helps structure discovery, planning, design, and delivery into reusable documents that both humans and AI agents can follow.
+Turns a rough idea into a compact, implementation-ready blueprint for humans and AI agents.
 
-## Output Style
+## When to use
 
-The skill should produce a concise but complete planning package. Prioritize clarity over verbosity and keep each document structured, actionable, and easy to review.
+- New product, app, or internal tool
+- Major feature or platform change
+- Engineering handoff or discovery package
+- Multi-step build that needs scope, architecture, and rollout decisions
 
-## Best Use Cases
+## What to ask first
 
-Use this skill when you need to:
+Ask only for the highest-value missing context:
 
-- Start a new product or application from scratch
-- Plan a major feature or internal tool
-- Create a handoff package for engineering teams
-- Prepare a roadmap before implementation begins
-- Document product scope, architecture, and decisions in one place
+- Problem and desired outcome
+- Target users and primary user journey
+- Existing codebase or preferred stack
+- Launch scope, timeline, and constraints
+- Data sensitivity, compliance, and security needs
+- Success metric or definition of done
 
-## Inputs to Gather
+If the user cannot answer something yet, proceed with explicit assumptions instead of blocking.
 
-Before writing the documents, ask for:
+## Operating rules
 
-- The product idea and primary goal
-- Target users or customer segment
-- Platform, device, or deployment context
-- Timeline, budget, and constraints
-- Preferred stack or existing system context
+1. Think before coding.
+   - State assumptions explicitly.
+   - If something is unclear, stop and ask.
+   - If multiple interpretations exist, surface them.
+   - If a simpler path exists, say so.
+2. Keep it simple.
+   - Build only what was asked.
+   - Avoid speculative flexibility, abstractions, and config.
+   - Prefer the minimum code or document set that solves the task.
+3. Make surgical changes.
+   - Touch only what the request requires.
+   - Match existing style.
+   - Do not refactor unrelated code.
+   - Remove only imports or artifacts your changes created.
+4. Work toward a verified goal.
+   - State a brief plan for multi-step work.
+   - Define what success looks like before editing.
+   - Loop until the result is checked.
+5. Pick the lightest blueprint that fits the request.
+   - Lite: PRD, TRD, PHASES, MEMORY
+   - Standard: add ARCHITECTURE, SCHEMA, RULES, DESIGN
+   - Full: add SECURITY and MODULES for new, sensitive, or multi-service systems
+6. Use one source of truth per topic.
+   - PRD = why, who, what
+   - TRD = technical constraints and integration choices
+   - ARCHITECTURE = system shape and data flow
+   - SCHEMA = entities, relationships, and contracts
+   - SECURITY = trust boundaries and protections
+   - MODULES = ownership and boundaries
+   - RULES = engineering standards and guardrails
+   - PHASES = delivery order and exit criteria
+   - DESIGN = user experience and interface direction
+   - MEMORY = decisions, assumptions, open questions, and changes
+7. Prefer the current codebase, existing docs, and real constraints over invented defaults.
+8. For sensitive systems, call out least privilege, validation, secret handling, auditability, and recovery.
 
-## Workflow
+## Style modes
 
-1. Clarify the product goal, audience, and constraints.
-2. Ask for missing context such as platform, timeline, users, stack, and constraints.
-3. Create or update the planning documents in the project folder:
-   - PRD.md
-   - ARCHITECTURE.md
-   - RULES.md
-   - PHASES.md
-   - DESIGN.md
-   - MEMORY.md
-4. Keep the documents aligned so scope, architecture, design, and roadmap reinforce each other.
-5. Highlight any assumptions, risks, or open questions before concluding.
-6. End with a short validation checklist and the next recommended actions.
+Use the same blueprint structure, but tune the wording for the audience:
 
-## Decision Rules
+### AI-agent prompting
 
-- If the request is a new product, produce all six documents.
-- If the request is a feature within an existing system, create only the relevant documents and link them to the current codebase.
-- If the user already has requirements, adapt the templates instead of repeating them.
-- If the stack is unclear, propose a practical default and explain the tradeoff.
+- Use direct, imperative language.
+- Prefer unambiguous labels, decision points, and verification steps.
+- Keep prompts compact and easy for another agent to continue.
+- Avoid motivational prose, marketing language, and filler.
 
-## Deliverables
+### Human handoff
 
-Create these files at the project root or in a docs folder:
+- Add just enough context for a reviewer to understand why the plan exists.
+- Make assumptions, tradeoffs, and next actions easy to scan.
+- Keep the tone practical and collaborative.
+- Highlight what changed, what is risky, and what is still open.
 
-- PRD.md: product problem, target users, goals, requirements, and success metrics
-- ARCHITECTURE.md: system design, modules, interfaces, deployment, and risks
-- RULES.md: coding standards, testing expectations, and collaboration rules
-- PHASES.md: milestones, sequencing, and delivery checkpoints
-- DESIGN.md: user experience and interface direction
-- MEMORY.md: important context, decisions, and open questions
+### Ponytail minimalism
 
-## Quality Bar
+- Use the smallest useful blueprint set.
+- Remove any section that does not help the next decision.
+- Prefer one clear default over optional branches.
+- If a section can be one line, make it one line.
 
-The result should be:
+## Output contract
 
-- Clear enough to begin implementation
-- Specific enough to reduce ambiguity
-- Structured enough for team collaboration
-- Flexible enough to evolve over time
+Create or update only the documents the request needs, in the project root or a `blueprint/` folder. Keep the output practical and versionable, then end with:
 
-## Example Prompts
+- assumptions made
+- open questions
+- recommended next actions
 
-- Create a full blueprint for a SaaS analytics platform.
-- Generate PRD, architecture, rules, phases, design, and memory docs for a mobile app.
-- Build a planning package for an AI-powered internal productivity tool.
+## References
 
-## Related Files
-
-- [sources.md](./sources.md)
-- [references/blueprint-workflow.md](./references/blueprint-workflow.md)
+- [Blueprint workflow](references/blueprint-workflow.md)
+- [Templates](assets/templates/)

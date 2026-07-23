@@ -1,22 +1,33 @@
 # Memory
 
-## Project Context
+## Project context
 
 - Project summary:
 - Current status:
 - Important constraints:
+- Key stakeholders:
 
-## Decisions Log
+## Decision log
 
-- Decision 1:
-- Decision 2:
+| Decision | Reasoning | Date |
+| -------- | --------- | ---- |
+| ...      | ...       | ...  |
 
-## Open Questions
+## Assumptions and constraints
 
-- Question 1:
-- Question 2:
+- Assumptions:
+- Constraints:
+- Unknowns:
 
-## Notes for Future Work
+## Open questions
 
-- Note 1:
-- Note 2:
+- ...
+
+## Change history
+
+- Update:
+- Why it changed:
+
+## Notes for future work
+
+- ...

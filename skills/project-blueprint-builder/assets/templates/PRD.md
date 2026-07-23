@@ -1,66 +1,65 @@
 # Product Requirements Document
 
-## 1. Product Summary
+## Overview
 
 - Product name:
 - Problem statement:
 - Target users:
-- Primary goal:
+- Primary outcome:
+- Release type:
 
-## 2. Problem to Solve
+## Context
 
-Describe the current pain point, user friction, or business opportunity.
+- Why now:
+- Existing system or starting point:
+- Constraints:
+- Non-goals:
 
-## 3. Goals and Success Metrics
+## Scope
 
-### Business Goals
+### In scope
 
-- Goal 1:
-- Goal 2:
+- ...
 
-### User Goals
+### Out of scope
 
-- Goal 1:
-- Goal 2:
+- ...
 
-### Success Metrics
+### MVP
 
-- Metric 1:
-- Metric 2:
+- ...
 
-## 4. Users and Personas
+### Later
 
-- Primary user:
-- Secondary user:
-- Needs and constraints:
+- ...
 
-## 5. Scope
+## Success
 
-### In Scope
+- User success metrics:
+- Business success metrics:
+- Measurement approach:
 
-- Feature 1
-- Feature 2
+## Requirements
 
-### Out of Scope
+### Functional
 
-- Feature 1
-- Feature 2
+- ...
 
-## 6. Functional Requirements
-
-1. Requirement 1
-2. Requirement 2
-3. Requirement 3
-
-## 7. Non-Functional Requirements
+### Non-functional
 
 - Performance:
-- Security:
 - Reliability:
 - Accessibility:
 - Compliance:
+- Observability:
 
-## 8. Risks and Assumptions
+### Acceptance criteria
 
-- Risk 1:
-- Assumption 1:
+- ...
+
+## Risks and decisions
+
+- Assumptions:
+- Risks:
+- Open questions:
+- Dependencies:

@@ -2,36 +2,42 @@
 
 ## Phase 0: Discovery
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:
 
 ## Phase 1: Foundation
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:
 
-## Phase 2: Core Features
+## Phase 2: Core Experience
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:
 
 ## Phase 3: Quality and Hardening
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:
 
-## Phase 4: Launch
+## Phase 4: Launch Readiness
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:
 
-## Phase 5: Growth and Improvement
+## Phase 5: Growth and Evolution
 
-- Goal:
+- Objective:
 - Deliverables:
 - Exit criteria:
+- Dependencies:

@@ -1,28 +1,40 @@
 # Design
 
-## 1. Product Experience
+## Experience vision
 
-Describe the primary user journey and expected experience.
+- Primary user journey:
+- Intended experience:
+- Key moments of delight or friction:
 
-## 2. Layout and Structure
+## Information architecture
 
 - Main screens:
 - Navigation model:
 - Key components:
+- Information hierarchy:
 
-## 3. Interaction Decisions
+## Interaction design
 
-- How users complete core tasks
-- Feedback and state handling
-- Empty states and error states
+- How users complete core tasks:
+- Feedback and state handling:
+- Empty states and error states:
+- Success and failure patterns:
 
-## 4. Visual Direction
+## Visual direction
 
 - Style and tone:
 - Brand or UI principles:
 - Accessibility considerations:
+- Responsive behavior:
 
-## 5. Open Design Questions
+## Content and UX notes
+
+- Voice and tone:
+- Empty-state copy:
+- Validation messaging:
+- Error handling copy:
+
+## Design questions
 
 - Question 1:
 - Question 2:
