@@ -1,105 +1,107 @@
 ---
 name: mvp-builder
-description: 'Turns ideas into working prototypes and MVPs with the smallest useful scope. Use when validating a core hypothesis, shipping a demo-ready flow, or choosing a practical stack for fast learning.'
+description: 'Turns a rough idea into a working prototype or MVP with the smallest scope that can prove or disprove one hypothesis. Use when validating a product idea, building a demo or stakeholder-ready flow, scoping or cutting a v1, or choosing a fast, practical stack. Triggers on "MVP", "prototype", "proof of concept", "PoC", "demo", "hackathon", "validate this idea", and "what should v1 include".'
 license: Apache-2.0
 metadata:
-  version: 1.2.0
-  author: shippu sharma
-  email: shippusharma00@gmail.com
-  tags:
-    - prototype
-    - mvp
-    - validation
-    - rapid
+  version: '1.3.0'
+  author: 'Shippu Sharma'
+  email: 'shippusharma00@gmail.com'
+  tags: 'prototype, mvp, validation, scoping, rapid'
 ---
 
 # MVP Builder
 
-## What it does
-
-Moves a rough idea to a working prototype or MVP with the smallest useful scope.
+Build the smallest working version of an idea that shows whether it deserves more investment.
 
 ## When to use
 
-- Validate a core hypothesis quickly
-- Build a demo-ready or stakeholder-ready flow
-- Test a product idea before committing to a larger build
-- Compare implementation paths or stacks
-- Learn from real feedback without overbuilding
+- Validate a product idea or core hypothesis before a larger build
+- Build a demo, pilot, or stakeholder-ready flow
+- Cut an overgrown v1 down to what matters
+- Pick a fast, practical stack for a prototype
+
+To produce a full planning package (PRD, architecture, security, phases) before building, use `project-blueprint-builder` instead.
 
 ## What to ask first
 
-Ask only for the highest-value missing context:
+Infer what you can from the codebase and conversation. Then ask only what is still missing, at most three questions in one message:
 
-- The problem and core idea
-- The target users
-- The one flow that must work
-- Timeline, budget, and constraints
-- Preferred stack or existing system
-- What is in v1 and what is deferred
-- The success metric or learning goal
+1. Who is the user, and what problem do they have?
+2. What is the one flow that must work end to end?
+3. How will we know it worked: what metric, signal, or decision does it unblock?
 
-If the answer is unclear, state assumptions and keep going when the risk is low.
+When an answer is missing and the risk is low, state an assumption and continue.
 
-## Operating rules
+## Workflow
 
-1. Think before coding.
-   - State assumptions explicitly.
-   - If multiple interpretations exist, surface them.
-   - If something is unclear, ask.
-   - If a simpler path exists, say so.
-2. Keep it simple.
-   - Build only what was asked.
-   - Avoid speculative flexibility, abstractions, and config.
-   - Prefer the minimum code that proves the idea.
-3. Make surgical changes.
-   - Touch only what the request requires.
-   - Match the existing style.
-   - Do not refactor unrelated code.
-   - Remove only artifacts your changes create.
-4. Work toward a verified goal.
-   - State a brief plan for multi-step work.
-   - Define success before editing.
-   - Loop until the result is checked.
-5. Keep the MVP lean.
-   - Focus on one core workflow.
-   - Use the fastest practical path that fits the context.
-   - Add feedback, analytics, or observation only if they help validation.
-   - Skip anything that does not help learning.
-6. Prefer the current stack when it is good enough.
-   - Reuse existing tools and patterns first.
-   - Recommend a practical default only when needed.
-   - Explain tradeoffs clearly when there are choices.
+### 1. Frame the hypothesis
 
-## Style modes
+Write one sentence before any code:
 
-Use the same MVP structure, but tune the wording for the audience:
+> We believe **[user]** will **[behavior]** because **[reason]**. We'll know we're right when **[measurable signal]**.
 
-### AI-agent prompting
+If you can't fill it in, the idea isn't ready to build. Say so and help sharpen it.
 
-- Use direct, imperative language.
-- Prefer compact prompts, labels, and verification steps.
-- Make the hypothesis and success check obvious.
-- Avoid filler and marketing language.
+### 2. Cut scope to one flow
 
-### Human handoff
+List the candidate features, then sort each into **Build**, **Fake**, or **Defer**:
 
-- Add just enough context for a reviewer to understand the why.
-- Make assumptions, tradeoffs, and next steps easy to scan.
-- Keep the tone practical and collaborative.
-- Highlight what was learned and what remains open.
+- **Build**: only what the core flow cannot work without.
+- **Fake**: anything users won't notice is manual, such as hardcoded data, seeded accounts, manual fulfilment, a spreadsheet as the backend, or an email instead of a notification system.
+- **Defer**: everything else, written down so it isn't lost.
 
-### Ponytail minimalism
+Usually defer: multi-tenancy, admin panels, role systems, settings pages, i18n, custom design systems, microservices, caching, and horizontal scaling.
 
-- Use the smallest useful MVP scope.
-- Remove any feature that does not help validation.
-- Prefer one clear default over optional branches.
-- If a section can be one line, make it one line.
+### 3. Choose the stack
 
-## Output contract
+1. Existing codebase or team stack: use it.
+2. Otherwise pick boring, managed defaults the team already knows: one deployable unit, one database, and a hosted auth provider only if login is part of the hypothesis.
+3. State the choice in one line with its main tradeoff. Offer alternatives only when the choice is genuinely close.
 
-Create or provide only what the task needs, then end with:
+### 4. Build a thin vertical slice
 
-- assumptions made
-- open questions
-- recommended next actions
+- Get the core flow working end to end before polishing anything, and polish only what affects the success signal.
+- Write the minimum code that proves the idea. No speculative abstractions, flags, or config.
+- In an existing codebase, make surgical changes: match its style and touch only what the flow needs.
+- Instrument only the success signal from step 1.
+
+### 5. Keep the safety basics
+
+Even a prototype must:
+
+- keep secrets out of code and version control,
+- validate input on anything publicly reachable,
+- avoid collecting real personal or payment data unless the hypothesis requires it,
+- be runnable by someone else from its README.
+
+### 6. Verify
+
+Run the core flow yourself. It's done when the flow works on a clean run, the success signal is captured, and the setup steps are written down. Never report done on code you haven't run. If you can't run it, say exactly what remains unverified.
+
+## Output
+
+Fill in [the MVP brief](assets/templates/MVP-BRIEF.md): inline for advice-only requests, or as `MVP.md` in the project root when you build. End with:
+
+- **Assumptions made**
+- **Open questions**
+- **Next actions**, where the first is concrete enough to start now
+
+## Tone by audience
+
+| Mode                | Use when                               | Style                                                                 |
+| ------------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| Agent prompting     | Another agent will read the output     | Imperative and compact, with explicit verification steps. No filler.  |
+| Human handoff       | A person reviews or continues the work | A brief "why", scannable tradeoffs, and what's learned and still open |
+| Ponytail minimalism | The user wants the bare minimum        | One default, no optional branches, one line wherever possible         |
+
+## Example
+
+**Prompt:** "I want an app where freelancers send invoices and get paid."
+
+**Good response shape:**
+
+- **Hypothesis:** Freelancers will send invoices as a payment link instead of a PDF because clients pay faster. We're right if 5 of 10 pilot users send 2+ invoices within two weeks.
+- **Build:** create an invoice, share a payment link, show paid/unpaid status.
+- **Fake:** payment confirmation marked manually; one hardcoded currency.
+- **Defer:** recurring invoices, tax rules, multi-currency, team accounts, reminders.
+- **Stack:** the existing web app and database, plus a hosted payment-link provider instead of a custom checkout. The tradeoff is less control over the payment page.

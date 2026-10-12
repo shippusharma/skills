@@ -36,54 +36,61 @@ Before creating a Pull Request:
 
 # Development Setup
 
-Clone the repository:
+Requires Node.js 20 or later.
 
 ```bash
 git clone https://github.com/shippusharma/skills.git
 cd skills
+npm install
 ```
 
-List available skills:
+Useful commands:
 
 ```bash
-./scripts/list-skills.sh
+npm run list-skills   # list every skill with its version and description
+npm run validate      # check skills against the Agent Skills spec and repo rules
+npm run check         # validate + formatting check (the same as CI)
+npm run format        # auto-format all files
 ```
 
 ---
 
 # Project Structure
 
-```
+```text
 skills/
-├── skill-name/
-│   ├── SKILL.md
-│   └── assets/ (optional)
+└── skill-name/
+    ├── SKILL.md            # required
+    ├── LICENSE.txt
+    ├── references/         # optional, detail loaded on demand
+    └── assets/templates/   # optional, files the skill fills in
 
-scripts/
-spec/
+scripts/skills.mjs          # list, validate, sync-version
+spec/agent-skills-spec.md   # authoring rules and conventions
+.changeset/                 # pending release notes
 
 README.md
 CONTRIBUTING.md
 SECURITY.md
-LICENSE
+LICENCE
 ```
 
 ---
 
 # Adding a New Skill
 
-1. Create a new folder inside `skills/`.
+1. Create a folder inside `skills/`. Its name must be lowercase with hyphens, and it becomes the skill's `name`.
 
-```
+```text
 skills/
 └── my-awesome-skill/
 ```
 
-2. Add a `SKILL.md` file.
+2. Add a `SKILL.md` and a `LICENSE.txt`.
 
-3. Follow the specification in:
+3. Follow the authoring guide in:
 
-```
+```text
 spec/agent-skills-spec.md
 ```
 
@@ -91,14 +98,19 @@ spec/agent-skills-spec.md
 
 - Focused on a single workflow
 - Reusable
-- Well documented
-- Easy to understand
+- Short, with detail moved into `references/` or `assets/`
 - Framework agnostic whenever possible
+- Illustrated with at least one realistic example prompt
 
-5. Update the following files:
+5. Add the skill to the table in `README.md` (the validator checks this).
 
-- `README.md`
-- Changelog (if applicable)
+6. Run `npm run check` and fix anything it reports.
+
+7. Add a changeset describing the change:
+
+```bash
+npm run semvar:changeset
+```
 
 ---
 
@@ -119,10 +131,11 @@ A good skill should:
 
 Before submitting a Pull Request, ensure:
 
-- ✅ The skill works as expected.
+- ✅ `npm run check` passes.
+- ✅ You tried the changed skill with at least one agent.
+- ✅ `metadata.version` is bumped for any skill whose behavior changed.
 - ✅ Documentation is updated.
-- ✅ Formatting is consistent.
-- ✅ Existing skills are not broken.
+- ✅ A changeset is included.
 - ✅ The Pull Request has a clear description.
 
 Keep Pull Requests focused on a single feature or fix whenever possible.
@@ -145,6 +158,26 @@ docs: improve installation guide
 chore: update repository metadata
 
 refactor: simplify folder structure
+```
+
+---
+
+# Releases
+
+Maintainers release from `main` with Changesets:
+
+```bash
+npm run semvar:status    # preview pending version bumps
+npm run semvar:version   # bump package.json, update CHANGELOG.md, sync plugin manifests
+npm run semvar:tag       # create the git tag
+```
+
+`semvar:version` keeps `.claude-plugin/plugin.json` and `.codex-plugin/plugin.json` in sync with `package.json`, so never edit those versions by hand.
+
+The changelog links each entry to its GitHub commit, so `semvar:version` needs a `GITHUB_TOKEN` with `read:user` and `repo:status` scopes:
+
+```bash
+GITHUB_TOKEN=<token> npm run semvar:version
 ```
 
 ---

@@ -10,7 +10,9 @@
     "developer",
     "engineering",
     "mvp-builder",
-    "project-blueprint-builder"
+    "project-blueprint-builder",
+    "repo-impact-optimizer",
+    "skill-quality-reviewer"
   ],
   "author": {
     "name": "Shippu Sharma",

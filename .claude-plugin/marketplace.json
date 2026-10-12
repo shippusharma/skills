@@ -21,7 +21,9 @@
         "developer",
         "engineering",
         "mvp-builder",
-        "project-blueprint-builder"
+        "project-blueprint-builder",
+        "repo-impact-optimizer",
+        "skill-quality-reviewer"
       ],
       "homepage": "https://github.com/shippusharma/skills",
       "license": "MIT"

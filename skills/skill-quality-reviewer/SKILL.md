@@ -1,144 +1,58 @@
 ---
 name: skill-quality-reviewer
-description: Use this agent when you want to review, refine, or strengthen an individual skill so it is clearer, more actionable, more reusable, and better aligned with the repository's standards.
+description: 'Reviews and improves a single agent skill (its SKILL.md and bundled files) for spec compliance, trigger accuracy, clarity, actionability, and token efficiency, then proposes or applies ranked edits. Use when the user wants to review, audit, refine, or harden a skill before publishing, asks why a skill triggers too often or not at all, or wants a SKILL.md rewritten to be clearer or shorter.'
 license: Apache-2.0
 metadata:
-  version: 1.0.0
-  author: shippu sharma
-  email: shippusharma00@gmail.com
+  version: '1.1.0'
+  author: 'Shippu Sharma'
+  email: 'shippusharma00@gmail.com'
+  tags: 'agent-skills, review, quality, prompt-engineering'
 ---
 
 # Skill Quality Reviewer
 
-## Mission
+Raise one skill to a publishable standard: valid, easy for agents to trigger, easy to follow, and no longer than it needs to be.
 
-Help improve the quality of a single skill by making it more practical, more consistent, and more useful to the people who will actually use it. The goal is to raise the standard of each skill without making it bloated, vague, or overly complex.
+## When to use
 
-## When to Use This Agent
+- Reviewing a skill before publishing or sharing it
+- A skill triggers too often, too rarely, or not at all
+- A SKILL.md is long, vague, or inconsistent with its sibling skills
+- Rewriting a skill to be sharper without changing what it does
 
-Choose this agent when you want to:
+To improve a whole repository's adoption and onboarding, use `repo-impact-optimizer`.
 
-- review an existing skill for clarity and usefulness
-- improve a skill's structure, instructions, or examples
-- identify gaps in logic, scope, or completeness
-- make a skill easier to follow and apply
-- strengthen a skill before publishing or sharing it
+## Workflow
 
-## Core Principles
+1. Read SKILL.md and every file it links to. Sum up the skill's job in one sentence. If you can't, that is the first finding.
+2. Check the hard rules below. If the repository has a validator (for example `npm run validate` or `skills-ref validate`), run it.
+3. Rate each dimension 1–5 using [the rubric](references/rubric.md), citing the line or section behind each score.
+4. Write three prompts that should activate the skill and three near-misses that shouldn't. Check that the description alone routes each one correctly.
+5. List fixes by impact. Each names the location, the problem, and the exact replacement text or structural change.
+6. If the user wants the fixes applied, keep the author's voice and intent, and bump `metadata.version` when the skill's behavior changes.
 
-- Prioritize clarity over cleverness.
-- Make every skill easier to understand and use.
-- Focus on practical value, not just completeness.
-- Keep the skill reusable, scoped, and maintainable.
-- Improve the experience for both humans and AI agents.
+## Hard rules
 
-## What to Evaluate
+These come from the [Agent Skills specification](https://agentskills.io/specification). Any violation fails the review.
 
-Review the skill against these areas:
+- `name` is 1–64 characters: lowercase letters, digits, and single hyphens, with no leading or trailing hyphen. It matches the directory name.
+- `description` is 1–1024 characters and says both what the skill does and when to use it.
+- `compatibility`, if present, is at most 500 characters.
+- `metadata`, if present, maps string keys to string values only: no lists or nested maps. Values YAML would read as numbers, booleans, or dates are quoted.
+- Relative links resolve to files inside the skill folder and stay one level deep from SKILL.md.
 
-1. Purpose and scope
-   - Is the skill's role obvious?
-   - Is the scope narrow enough to be useful?
-   - Does it clearly state when to use it?
+## Output
 
-2. Structure and organization
-   - Is the content logically ordered?
-   - Are sections easy to scan?
-   - Are headings and workflow steps clear?
+1. **Verdict:** publishable, needs work, or not ready, in one sentence.
+2. **Spec check:** a pass, or each rule that fails.
+3. **Scores:** the rubric table, with one line of evidence per row.
+4. **Trigger test:** the six prompts, and whether the description routes each one correctly.
+5. **Ranked fixes:** highest impact first, with replacement text for the top fix.
 
-3. Actionability
-   - Does the skill tell the user what to do next?
-   - Are the instructions concrete and practical?
-   - Are expectations and outcomes explicit?
+## Example
 
-4. Quality of examples
-   - Are examples realistic and helpful?
-   - Do they show the intended output or workflow?
-   - Are they strong enough to guide adoption?
+**Prompt:** "Review my `pdf-tools` skill. It never triggers."
 
-5. Consistency and standards
-   - Does the skill follow the repository format and style?
-   - Are metadata, naming, and framing consistent?
-   - Does it align with the overall quality bar of the repo?
+**Good response shape:** The verdict is "needs work", and the spec check passes. Triggering scores 1/5, because the description says "Helps with documents" and never mentions PDFs, forms, or merging, so the agent can't match user requests to it.
 
-## Review Approach
-
-1. Read the skill and identify its main goal.
-2. Check whether the skill is easy to understand from a first read.
-3. Look for vague language, missing steps, weak examples, or confusing structure.
-4. Recommend the highest-impact improvements first, with a clear reason for each suggestion.
-5. Suggest edits that improve usefulness without adding unnecessary complexity.
-
-## High-Impact Improvement Areas
-
-### 1. Clearer purpose
-
-Make it obvious:
-
-- what the skill is for
-- who should use it
-- what problem it solves
-
-### 2. Stronger workflow
-
-Improve the skill by making the process:
-
-- simpler
-- more sequential
-- easier to follow
-- more outcome-oriented
-
-### 3. Better examples
-
-Add or improve examples that show:
-
-- a typical prompt
-- the expected result
-- the desired quality of output
-
-### 4. Sharper guidance
-
-Replace generic advice with more specific guidance such as:
-
-- decision rules
-- anti-patterns to avoid
-- quality checks
-- success criteria
-
-### 5. Better maintainability
-
-Make the skill easier to evolve by improving:
-
-- readability
-- consistency
-- structure
-- modularity
-
-## Recommended Output Format
-
-When reviewing a skill, respond with:
-
-1. A short verdict on overall quality
-2. The top strengths of the skill
-3. The biggest weaknesses or gaps
-4. The top improvements ranked by impact
-5. A concrete edit plan or sample rewrite, including the first change to make
-
-## Quality Bar
-
-A strong skill should be:
-
-- clear
-- practical
-- reusable
-- focused
-- easy to follow
-- grounded in real use cases
-
-## Example Prompts
-
-- Review this skill and suggest the highest-impact improvements.
-- Make this skill more practical and easier to use.
-- Improve the structure and clarity of this skill without overcomplicating it.
-- Help me turn this skill into a stronger, more polished contribution.
-- What should be improved first in this skill to increase its usefulness?
+The top fix is to replace the description with: "Extracts text and tables from PDFs, fills PDF forms, and merges files. Use when the user mentions PDFs, forms, or document extraction."

@@ -1,270 +1,106 @@
 # Agent Skills
 
-A curated collection of reusable **AI agent skills** for AI-assisted software development.
+[![CI](https://github.com/shippusharma/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/shippusharma/skills/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENCE)
 
-Each skill is packaged as a self-contained module with its own `SKILL.md` file and is designed to help AI assistants perform specialized development workflows consistently and efficiently.
+Reusable skills that make AI coding agents better at real engineering work: scoping MVPs, planning projects before code, and improving repositories and the skills themselves.
 
-Whether you're validating a startup idea, planning a scalable architecture, or generating project documentation, these skills help reduce ambiguity and accelerate development.
+Each skill is a self-contained folder with a `SKILL.md` that follows the open [Agent Skills specification](https://agentskills.io/specification). It works with Claude Code, Codex, and any other agent that supports skills.
 
----
-
-## ✨ Features
-
-- 📦 Reusable and modular skills
-- 🤖 Designed for AI-assisted development
-- 🚀 One-command installation
-- 📚 Self-contained documentation
-- 🧩 Easy to extend with custom skills
-- 🔄 Consistent workflow across projects
-- 🛠️ Works with any tech stack unless specified otherwise
-
----
-
-# Installation
-
-Install all available skills:
+## Quick start
 
 ```bash
-# Install all available skills
+# Install every skill
 npx skills add shippusharma/skills
+
+# Or install just one
+npx skills add shippusharma/skills --skill mvp-builder
 ```
 
-Install a specific skill:
+Then ask your agent in plain language, for example _"Scope an MVP for a habit-tracking app"_. The agent loads the matching skill automatically.
 
-```bash
-# Install a specific skill
-npx skills add https://github.com/shippusharma/skills --skill <skill-name>
+**Claude Code plugin:**
+
+```text
+/plugin marketplace add shippusharma/skills
+/plugin install shippusharma-skills@shippusharma
 ```
 
-Example:
+## Skills
 
-```bash
-npx skills add https://github.com/shippusharma/skills --skill mvp-builder
-```
+| Skill                                                                  | Use it to                                                                         | You get                                                                                       |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| [mvp-builder](skills/mvp-builder/SKILL.md)                             | Turn an idea into a working MVP with the smallest scope that tests one hypothesis | A hypothesis, a Build / Fake / Defer scope, a stack choice, a working slice, and an MVP brief |
+| [project-blueprint-builder](skills/project-blueprint-builder/SKILL.md) | Plan a product or major feature before writing code                               | A PRD, TRD, architecture, schema, security, modules, rules, phases, design, and decision log  |
+| [repo-impact-optimizer](skills/repo-impact-optimizer/SKILL.md)         | Find the changes that will most improve a repo's adoption and onboarding          | A ranked impact/effort table and a next-iteration plan                                        |
+| [skill-quality-reviewer](skills/skill-quality-reviewer/SKILL.md)       | Review and harden a single skill before publishing it                             | A spec check, a scored rubric, a trigger test, and ranked fixes                               |
 
----
+Not sure between the first two? Start with `mvp-builder` when the idea itself is unproven, and with `project-blueprint-builder` when you already know you're building a long-lived system.
 
-# Quick Decision Guide
+## What each skill does
 
-| Skill                            | Best For                                                                 |
-| -------------------------------- | ------------------------------------------------------------------------ |
-| ✅ **mvp-builder**               | Build a production-ready MVP quickly for validation and rapid iteration. |
-| ✅ **project-blueprint-builder** | Generate a complete implementation blueprint before writing code.        |
+### mvp-builder
 
----
+> _"I want an app where freelancers send invoices and get paid. Build me an MVP."_
 
-# Available Skills
+Writes a testable hypothesis, sorts features into Build, Fake, and Defer, and reuses your existing stack where it can. Then it builds and runs one thin end-to-end slice. Even a prototype keeps secrets out of code and validates public input. The plan goes into an [MVP brief](skills/mvp-builder/assets/templates/MVP-BRIEF.md).
 
-## 1. 🚀 mvp-builder
+### project-blueprint-builder
 
-Turn an idea into a production-ready Minimum Viable Product (MVP) with a strong focus on rapid validation, lean architecture, and fast development.
+> _"Plan a multi-tenant SaaS where clinics book patient appointments."_
 
-### Why use it?
+Picks a depth and writes only the documents that depth needs into `blueprint/`, starting from [templates](skills/project-blueprint-builder/assets/templates/):
 
-- ✅ Validate startup ideas quickly
-- ✅ Reduce time to market
-- ✅ Focus on essential features only
-- ✅ Build a scalable MVP without over-engineering
-- ✅ Get AI-recommended architecture and technology stack
-- ✅ Iterate quickly using user feedback
+| Depth    | Documents                                  | Use for                                                                  |
+| -------- | ------------------------------------------ | ------------------------------------------------------------------------ |
+| Lite     | PRD, TRD, PHASES, MEMORY                   | A narrow feature or spike                                                |
+| Standard | Lite + ARCHITECTURE, SCHEMA, RULES, DESIGN | Most product work                                                        |
+| Full     | Standard + SECURITY, MODULES               | Auth, payments, personal data, or multi-tenant and multi-service systems |
 
-### Best For
+Before handing off, it checks the blueprint against a [quality gate](skills/project-blueprint-builder/references/quality-gate.md): every requirement maps to a phase, no placeholders remain, and every trust boundary has a mitigation.
 
-- Startup founders
-- Indie hackers
-- Hackathons
-- Rapid prototyping
-- Product validation
-- Internal tools
+### repo-impact-optimizer
 
-### Generates
+> _"What should I improve first to get more people using this CLI?"_
 
-- Product Requirements Document (PRD)
-- Recommended Tech Stack
-- Project Folder Structure
-- Database Design
-- API Design
-- UI Flow
-- Development Plan
-- MVP Roadmap
+Walks your repo the way a newcomer would (discover, understand, try, adopt, contribute) using an [audit checklist](skills/repo-impact-optimizer/references/audit-checklist.md). It returns at most seven ranked changes, each naming the file to edit and what in the repo prompted it.
 
-### Install
+### skill-quality-reviewer
 
-```bash
-npx skills add https://github.com/shippusharma/skills --skill mvp-builder
-```
+> _"Review my pdf-tools skill. It never triggers."_
 
----
+Checks the spec's hard rules, scores eight dimensions on a [rubric](skills/skill-quality-reviewer/references/rubric.md), and runs a six-prompt trigger test. It returns ranked fixes, with replacement text for the top one.
 
-## 2. 🏗️ project-blueprint-builder
+## Repository layout
 
-Generate a complete implementation blueprint before writing code.
-
-Designed for projects that require planning, documentation, scalability, maintainability, and AI collaboration.
-
-### Why use it?
-
-- ✅ Reduce ambiguity before development
-- ✅ Create a single source of truth
-- ✅ Improve collaboration between developers and AI
-- ✅ Plan architecture before implementation
-- ✅ Prevent expensive redesigns later
-- ✅ Standardize project documentation
-
-### Best For
-
-- SaaS applications
-- Enterprise software
-- Large-scale applications
-- Multi-developer teams
-- AI-assisted development
-- Long-term projects
-
-### Generates
-
-- Product Requirements Document (PRD)
-- Technical Architecture
-- Folder Structure
-- Coding Standards
-- Database Design
-- API Contracts
-- Security Checklist
-- UI/UX Guidelines
-- Development Phases
-- Memory Documents
-- AI Prompt Files
-- Project Documentation
-
-### Install
-
-```bash
-npx skills add https://github.com/shippusharma/skills --skill project-blueprint-builder
-```
-
----
-
-# Which Skill Should I Choose?
-
-### Choose **mvp-builder** if you want to:
-
-- ✅ Validate a business idea
-- ✅ Build an MVP quickly
-- ✅ Launch as fast as possible
-- ✅ Collect user feedback early
-- ✅ Iterate rapidly
-- ✅ Keep development lean
-
-### Choose **project-blueprint-builder** if you want to:
-
-- ✅ Plan before writing code
-- ✅ Build scalable software
-- ✅ Create comprehensive documentation
-- ✅ Design architecture first
-- ✅ Define coding standards
-- ✅ Work with multiple developers
-- ✅ Improve AI collaboration
-
----
-
-# Repository Structure
-
-```
+```text
 skills/
-├── mvp-builder/
-│   └── SKILL.md
-├── project-blueprint-builder/
-│   └── SKILL.md
-├── repo-impact-optimizer/
-│   └── SKILL.md
-├── skill-quality-reviewer/
-│   └── SKILL.md
-│
-scripts/
-└── list-skills.sh
-
-spec/
-└── agent-skills-spec.md
-.claude-plugin/
-└── marketplace.json
-└── plugin.json
-.codex-plugin/
-└── plugin.json
+├── mvp-builder/                 SKILL.md, assets/templates/
+├── project-blueprint-builder/   SKILL.md, references/, assets/templates/
+├── repo-impact-optimizer/       SKILL.md, references/
+└── skill-quality-reviewer/      SKILL.md, references/
+scripts/skills.mjs               list, validate, and sync-version
+spec/agent-skills-spec.md        authoring rules and repo conventions
+.claude-plugin/                  Claude Code plugin and marketplace manifests
+.codex-plugin/                   Codex plugin manifest
 ```
 
----
+## Contributing
 
-# How to Add a New Skill
+```bash
+npm install
+npm run list-skills   # see every skill and its version
+npm run check         # validate skills and check formatting
+```
 
-1. Create a new folder inside the `skills/` directory.
-2. Name it descriptively.
-3. Add a `SKILL.md` file.
-4. Follow the format defined in `spec/agent-skills-spec.md`.
-5. Keep the skill:
-   - Focused
-   - Reusable
-   - Practical
-   - Well documented
+To add a skill, create `skills/<name>/SKILL.md` following the [authoring guide](spec/agent-skills-spec.md), list it in this README, and add a changeset with `npm run semvar:changeset`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, and open an issue before large changes.
 
----
+## Security
 
-# Contributing
+Please report vulnerabilities privately, as described in [SECURITY.md](SECURITY.md).
 
-Contributions are welcome!
+## License
 
-You can help by:
+The repository is licensed under [MIT](LICENCE). Each skill folder also includes its own `LICENSE.txt` (Apache-2.0).
 
-- ✨ Adding new reusable skills
-- 🐛 Fixing bugs
-- 📖 Improving documentation
-- 💡 Suggesting new workflows
-- 🚀 Enhancing existing skills
-
-Please open an issue before submitting large feature changes.
-
----
-
-# Security
-
-If you discover a security vulnerability, please report it responsibly.
-
-📧 **shippusharma00@gmail.com**
-
----
-
-# Notes
-
-These skills are designed to be:
-
-- Lightweight
-- Modular
-- Reusable
-- AI-friendly
-- Easy to maintain
-- Easy to extend
-- Independent from specific frameworks whenever possible
-
----
-
-# References
-
-- GitHub Repository: [shippusharma/skills](https://github.com/shippusharma/skills)
-
----
-
-# License
-
-MIT - Use these skills in your projects, teams, tools, and IDS.
-
----
-
-## ⭐ Support
-
-If you find this repository useful:
-
-- ⭐ Star the repository
-- 🍴 Fork it
-- 🐞 Report issues
-- 💡 Suggest new skills
-- 🤝 Contribute improvements
-
-Your support helps improve the project and grow the collection of reusable AI development skills.
+If these skills are useful to you, a ⭐ helps other people find them.

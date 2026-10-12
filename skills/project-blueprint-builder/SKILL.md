@@ -1,118 +1,109 @@
 ---
 name: project-blueprint-builder
-description: 'Creates implementation-ready blueprints for new software products, features, apps, and internal tools. Use when starting a greenfield project, major feature, or technical handoff that needs PRD, TRD, architecture, schema, security, modules, rules, phases, design, and memory docs.'
+description: 'Creates implementation-ready project blueprints for humans and AI agents: PRD, TRD, architecture, schema, security, modules, engineering rules, delivery phases, design, and a decision log. Use when starting a greenfield product, app, or internal tool, planning a major feature or platform change, preparing an engineering handoff, or when the user asks for a PRD, technical spec, architecture doc, or project plan before writing code.'
 license: Apache-2.0
 metadata:
-  version: 1.2.0
-  author: shippu sharma
-  email: shippusharma00@gmail.com
-  tags:
-    - planning
-    - blueprint
-    - product
-    - architecture
-    - security
-    - design
+  version: '1.3.0'
+  author: 'Shippu Sharma'
+  email: 'shippusharma00@gmail.com'
+  tags: 'planning, blueprint, prd, architecture, security, design'
 ---
 
 # Project Blueprint Builder
 
-## What it does
-
-Turns a rough idea into a compact, implementation-ready blueprint for humans and AI agents.
+Turn a rough idea into the smallest set of planning documents that lets a team, or another agent, start building without guessing.
 
 ## When to use
 
 - New product, app, or internal tool
 - Major feature or platform change
 - Engineering handoff or discovery package
-- Multi-step build that needs scope, architecture, and rollout decisions
+- Any multi-step build that needs agreed scope, architecture, and rollout
+
+To build and validate an idea quickly instead of planning it, use `mvp-builder`.
 
 ## What to ask first
 
-Ask only for the highest-value missing context:
+Read the existing codebase and docs first. Then ask only for missing, high-leverage context, all in one message:
 
 - Problem and desired outcome
-- Target users and primary user journey
-- Existing codebase or preferred stack
-- Launch scope, timeline, and constraints
-- Data sensitivity, compliance, and security needs
-- Success metric or definition of done
+- Target users and their primary journey
+- Existing stack and hard constraints
+- Launch scope and timeline
+- Data sensitivity and compliance needs
+- Definition of done
 
-If the user cannot answer something yet, proceed with explicit assumptions instead of blocking.
+If the user can't answer yet, proceed with labelled assumptions and record them in MEMORY.
 
-## Operating rules
+## Choose the depth
 
-1. Think before coding.
-   - State assumptions explicitly.
-   - If something is unclear, stop and ask.
-   - If multiple interpretations exist, surface them.
-   - If a simpler path exists, say so.
-2. Keep it simple.
-   - Build only what was asked.
-   - Avoid speculative flexibility, abstractions, and config.
-   - Prefer the minimum code or document set that solves the task.
-3. Make surgical changes.
-   - Touch only what the request requires.
-   - Match existing style.
-   - Do not refactor unrelated code.
-   - Remove only imports or artifacts your changes created.
-4. Work toward a verified goal.
-   - State a brief plan for multi-step work.
-   - Define what success looks like before editing.
-   - Loop until the result is checked.
-5. Pick the lightest blueprint that fits the request.
-   - Lite: PRD, TRD, PHASES, MEMORY
-   - Standard: add ARCHITECTURE, SCHEMA, RULES, DESIGN
-   - Full: add SECURITY and MODULES for new, sensitive, or multi-service systems
-6. Use one source of truth per topic.
-   - PRD = why, who, what
-   - TRD = technical constraints and integration choices
-   - ARCHITECTURE = system shape and data flow
-   - SCHEMA = entities, relationships, and contracts
-   - SECURITY = trust boundaries and protections
-   - MODULES = ownership and boundaries
-   - RULES = engineering standards and guardrails
-   - PHASES = delivery order and exit criteria
-   - DESIGN = user experience and interface direction
-   - MEMORY = decisions, assumptions, open questions, and changes
-7. Prefer the current codebase, existing docs, and real constraints over invented defaults.
-8. For sensitive systems, call out least privilege, validation, secret handling, auditability, and recovery.
+| Depth    | Documents                                  | Use when                                                                          |
+| -------- | ------------------------------------------ | --------------------------------------------------------------------------------- |
+| Lite     | PRD, TRD, PHASES, MEMORY                   | A narrow feature, spike, or exploratory work                                      |
+| Standard | Lite + ARCHITECTURE, SCHEMA, RULES, DESIGN | Most product work                                                                 |
+| Full     | Standard + SECURITY, MODULES               | Auth, payments, personal data, multi-tenancy, or multi-service/multi-team systems |
 
-## Style modes
+Default to Standard. Go to Full when any of its triggers apply. Drop to Lite when the scope is a single change or the user asks for speed. State the chosen depth and the reason in one line.
 
-Use the same blueprint structure, but tune the wording for the audience:
+## Workflow
 
-### AI-agent prompting
+1. Write the PRD, then the TRD: the why, and the constraints.
+2. Add ARCHITECTURE and SCHEMA: system shape, data flow, and contracts.
+3. Add SECURITY and MODULES when the depth calls for them.
+4. Add RULES, DESIGN, and PHASES: how it's built, how it feels, and in what order.
+5. Log decisions, assumptions, and open questions in MEMORY as you go.
+6. Check the blueprint against [the quality gate](references/quality-gate.md), then hand off.
 
-- Use direct, imperative language.
-- Prefer unambiguous labels, decision points, and verification steps.
-- Keep prompts compact and easy for another agent to continue.
-- Avoid motivational prose, marketing language, and filler.
+Start each document from its template in [assets/templates/](assets/templates/), and delete sections that don't apply rather than writing "N/A".
 
-### Human handoff
+## Rules
 
-- Add just enough context for a reviewer to understand why the plan exists.
-- Make assumptions, tradeoffs, and next actions easy to scan.
-- Keep the tone practical and collaborative.
-- Highlight what changed, what is risky, and what is still open.
+1. Keep one source of truth per topic. Each fact lives in exactly one document, and other documents link to it.
 
-### Ponytail minimalism
+   | Document     | Owns                                            |
+   | ------------ | ----------------------------------------------- |
+   | PRD          | Why, who, what, and how success is measured     |
+   | TRD          | Technical constraints, integrations, rollout    |
+   | ARCHITECTURE | System shape, components, data flow, deployment |
+   | SCHEMA       | Entities, relationships, invariants, contracts  |
+   | SECURITY     | Trust boundaries, threats, protections          |
+   | MODULES      | Ownership, boundaries, interfaces               |
+   | RULES        | Engineering standards and guardrails            |
+   | PHASES       | Delivery order and exit criteria                |
+   | DESIGN       | User experience and interface direction         |
+   | MEMORY       | Decisions, assumptions, open questions, changes |
 
-- Use the smallest useful blueprint set.
-- Remove any section that does not help the next decision.
-- Prefer one clear default over optional branches.
-- If a section can be one line, make it one line.
+2. Prefer the current codebase, existing docs, and stated constraints over invented defaults. Give every technology choice a one-line reason tied to a requirement.
+3. Replace generic advice like "ensure scalability" with a decision, a number, or an open question. Give every requirement a testable acceptance criterion.
+4. When a request has several reasonable readings, list them and say which one you picked.
+5. Keep sections short and prefer tables to long paragraphs. Cut any section that doesn't inform the next decision.
+6. For anything touching auth, payments, personal data, or multi-tenancy, cover least privilege, input validation, secret handling, audit logging, and recovery, at any depth.
+7. When updating an existing blueprint, change only the affected documents and log the change in MEMORY.
 
-## Output contract
+## Output
 
-Create or update only the documents the request needs, in the project root or a `blueprint/` folder. Keep the output practical and versionable, then end with:
+Write the documents to `blueprint/`, using the template filenames (`blueprint/PRD.md`, `blueprint/TRD.md`, …). Use the project root instead if the user prefers it. End with:
 
-- assumptions made
-- open questions
-- recommended next actions
+- **Depth chosen** and why
+- **Assumptions made**
+- **Open questions**, ranked by how much they block
+- **Next actions**, where the first is concrete enough to start now
 
-## References
+## Tone by audience
 
-- [Blueprint workflow](references/blueprint-workflow.md)
-- [Templates](assets/templates/)
+| Mode                | Use when                               | Style                                                                           |
+| ------------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
+| Agent prompting     | Another agent will build from the docs | Imperative, unambiguous labels, explicit decision points and verification steps |
+| Human handoff       | People review or own the plan          | A brief "why", scannable tradeoffs, what's risky and what's still open          |
+| Ponytail minimalism | The user wants the bare minimum        | Smallest document set, one default per decision, one line wherever possible     |
+
+## Example
+
+**Prompt:** "Plan a multi-tenant SaaS where clinics book patient appointments."
+
+**Good response shape:** Full depth, because the system holds health data and is multi-tenant.
+
+- **PRD:** booking, rescheduling, and reminders in v1; billing and telehealth deferred.
+- **SECURITY:** tenant isolation, health-data handling, and audit logs.
+- **PHASES:** tenant isolation lands in Phase 1, because it's expensive to retrofit.
+- **MEMORY:** records the blocking question "Which regions and compliance regimes apply at launch?"
