@@ -1,9 +1,9 @@
 ---
 name: mvp-builder
 description: 'Turns a rough idea into a working prototype or MVP with the smallest scope that can prove or disprove one hypothesis. Use when validating a product idea, building a demo or stakeholder-ready flow, scoping or cutting a v1, or choosing a fast, practical stack. Triggers on "MVP", "prototype", "proof of concept", "PoC", "demo", "hackathon", "validate this idea", and "what should v1 include".'
-license: Apache-2.0
+license: MIT
 metadata:
-  version: '1.3.0'
+  version: '1.3.1'
   author: 'Shippu Sharma'
   email: 'shippusharma00@gmail.com'
   tags: 'prototype, mvp, validation, scoping, rapid'
@@ -88,11 +88,11 @@ Fill in [the MVP brief](assets/templates/MVP-BRIEF.md): inline for advice-only r
 
 ## Tone by audience
 
-| Mode                | Use when                               | Style                                                                 |
-| ------------------- | -------------------------------------- | --------------------------------------------------------------------- |
-| Agent prompting     | Another agent will read the output     | Imperative and compact, with explicit verification steps. No filler.  |
-| Human handoff       | A person reviews or continues the work | A brief "why", scannable tradeoffs, and what's learned and still open |
-| Ponytail minimalism | The user wants the bare minimum        | One default, no optional branches, one line wherever possible         |
+| Mode            | Use when                               | Style                                                                 |
+| --------------- | -------------------------------------- | --------------------------------------------------------------------- |
+| Agent prompting | Another agent will read the output     | Imperative and compact, with explicit verification steps. No filler.  |
+| Human handoff   | A person reviews or continues the work | A brief "why", scannable tradeoffs, and what's learned and still open |
+| Minimal         | The user wants the bare minimum        | One default, no optional branches, one line wherever possible         |
 
 ## Example
 

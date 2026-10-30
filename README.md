@@ -1,7 +1,7 @@
 # Agent Skills
 
 [![CI](https://github.com/shippusharma/skills/actions/workflows/ci.yml/badge.svg)](https://github.com/shippusharma/skills/actions/workflows/ci.yml)
-[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENCE)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Reusable skills that make AI coding agents better at real engineering work: scoping MVPs, planning projects before code, and improving repositories and the skills themselves.
 
@@ -83,6 +83,7 @@ scripts/skills.mjs               list, validate, and sync-version
 spec/agent-skills-spec.md        authoring rules and repo conventions
 .claude-plugin/                  Claude Code plugin and marketplace manifests
 .codex-plugin/                   Codex plugin manifest
+.github/workflows/               CI, and release automation with Changesets
 ```
 
 ## Contributing
@@ -93,7 +94,7 @@ npm run list-skills   # see every skill and its version
 npm run check         # validate skills and check formatting
 ```
 
-To add a skill, create `skills/<name>/SKILL.md` following the [authoring guide](spec/agent-skills-spec.md), list it in this README, and add a changeset with `npm run semvar:changeset`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, and open an issue before large changes.
+To add a skill, create `skills/<name>/SKILL.md` following the [authoring guide](spec/agent-skills-spec.md), list it in this README, and add a changeset with `npm run semver:changeset`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, and open an issue before large changes.
 
 ## Security
 
@@ -101,6 +102,6 @@ Please report vulnerabilities privately, as described in [SECURITY.md](SECURITY.
 
 ## License
 
-The repository is licensed under [MIT](LICENCE). Each skill folder also includes its own `LICENSE.txt` (Apache-2.0).
+[MIT](LICENSE). Each skill folder ships a copy as `LICENSE.txt`, so a skill installed on its own keeps its license.
 
 If these skills are useful to you, a ⭐ helps other people find them.

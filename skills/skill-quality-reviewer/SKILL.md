@@ -1,9 +1,9 @@
 ---
 name: skill-quality-reviewer
 description: 'Reviews and improves a single agent skill (its SKILL.md and bundled files) for spec compliance, trigger accuracy, clarity, actionability, and token efficiency, then proposes or applies ranked edits. Use when the user wants to review, audit, refine, or harden a skill before publishing, asks why a skill triggers too often or not at all, or wants a SKILL.md rewritten to be clearer or shorter.'
-license: Apache-2.0
+license: MIT
 metadata:
-  version: '1.1.0'
+  version: '1.1.1'
   author: 'Shippu Sharma'
   email: 'shippusharma00@gmail.com'
   tags: 'agent-skills, review, quality, prompt-engineering'
@@ -39,7 +39,7 @@ These come from the [Agent Skills specification](https://agentskills.io/specific
 - `description` is 1–1024 characters and says both what the skill does and when to use it.
 - `compatibility`, if present, is at most 500 characters.
 - `metadata`, if present, maps string keys to string values only: no lists or nested maps. Values YAML would read as numbers, booleans, or dates are quoted.
-- Relative links resolve to files inside the skill folder and stay one level deep from SKILL.md.
+- Relative links resolve to files inside the skill folder, and SKILL.md links directly to every file the agent needs. Referenced files don't chain to further files.
 
 ## Output
 

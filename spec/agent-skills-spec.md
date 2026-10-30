@@ -13,7 +13,7 @@ Skills in this repository follow the open [Agent Skills specification](https://a
 | `metadata`      | No       | String keys to string values. No lists or nested maps.                                                           |
 | `allowed-tools` | No       | Experimental. A space-separated list of pre-approved tools.                                                      |
 
-Keep the SKILL.md body under 500 lines (ideally under ~5,000 tokens). Move detail into `references/` or `assets/`, and link to it with relative paths one level deep. Installed skills can only see files inside their own folder.
+Keep the SKILL.md body under 500 lines (ideally under ~5,000 tokens). Move detail into `references/` or `assets/`, and link each file directly from SKILL.md with a relative path. Referenced files shouldn't chain to further files, and installed skills can only see files inside their own folder.
 
 ## Repository conventions
 
@@ -23,7 +23,7 @@ Keep the SKILL.md body under 500 lines (ideally under ~5,000 tokens). Move detai
 ---
 name: my-skill
 description: 'Does X for Y. Use when the user asks for A, B, or C.'
-license: Apache-2.0
+license: MIT
 metadata:
   version: '1.0.0'
   author: 'Your Name'
@@ -41,7 +41,7 @@ metadata:
 ```text
 skills/my-skill/
 ├── SKILL.md            # required
-├── LICENSE.txt         # the skill's license
+├── LICENSE.txt         # copy of the repository's MIT LICENSE
 ├── references/         # detail the agent reads on demand
 └── assets/templates/   # files the skill fills in
 ```
@@ -56,7 +56,8 @@ Use these sections in this order, skipping any that don't apply:
 4. **Workflow**, as numbered, imperative steps
 5. **Rules** or **Guardrails**
 6. **Output**, saying exactly what is produced and where
-7. **Example**, a realistic prompt and the shape of a good response
+7. **Tone by audience**, when output style should change with the reader
+8. **Example**, a realistic prompt and the shape of a good response
 
 ## Validate
 
@@ -64,4 +65,4 @@ Use these sections in this order, skipping any that don't apply:
 npm run validate
 ```
 
-The validator also checks that each skill is listed in `README.md` and that the plugin manifest versions match `package.json`.
+The validator also checks that each skill is listed in `README.md` and that the plugin manifest versions match `package.json`. It warns about any file in a skill folder that SKILL.md never links to, because agents won't read it.

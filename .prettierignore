@@ -1,37 +1,8 @@
-# Dependencies
-node_modules
-.pnpm-store
-
-# Lockfiles
+# Prettier also skips everything in .gitignore.
 package-lock.json
-pnpm-lock.yaml
-yarn.lock
-
-# Build output and caches
-build
-dist
-coverage
-.cache
-.next
-.turbo
-.vercel
-*.tsbuildinfo
-
-# Logs
-logs
-*.log
-
-# Environment, editor, and OS files
-.env*
-.DS_Store
-.idea
-.vscode
-.husky
-*.swp
-*.swo
 
 # Skills installed locally while testing
 skills-lock.json
 .agents
-.codex
 .claude
+.codex
