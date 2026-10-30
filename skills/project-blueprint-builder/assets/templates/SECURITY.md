@@ -1,42 +1,33 @@
 # Security
 
-## Security objectives
+## Sensitive assets
 
-- Confidentiality goals:
-- Integrity goals:
-- Availability goals:
-- Privacy goals:
+| Asset | Classification | Stored in |
+| ----- | -------------- | --------- |
+| ...   | ...            | ...       |
 
 ## Trust boundaries and threats
 
-- Primary trust boundaries:
-- High-risk assets:
-- Abuse cases:
+| Trust boundary | Threat | Impact | Mitigation |
+| -------------- | ------ | ------ | ---------- |
+| ...            | ...    | ...    | ...        |
 
 ## Authentication and authorization
 
-- Authentication approach:
+- Authentication:
 - Roles and permissions:
-- Access boundaries:
 - Least-privilege model:
 
 ## Data protection
 
-- Encryption approach:
-- Secret management:
+- Encryption in transit and at rest:
+- Secret storage and rotation:
 - Sensitive data handling:
 - Data minimization:
 
-## Threats and mitigations
-
-| Threat | Impact | Mitigation |
-| ------ | ------ | ---------- |
-| ...    | ...    | ...        |
-
 ## Compliance and operations
 
-- Required compliance controls:
-- Logging and monitoring:
-- Audit trail:
-- Incident response plan:
-- Recovery and rotation steps:
+- Compliance controls:
+- Audit logging:
+- Security alerting:
+- Incident response:

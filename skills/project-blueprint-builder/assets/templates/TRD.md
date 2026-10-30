@@ -3,45 +3,38 @@
 ## Technical summary
 
 - Technical objective:
-- Scope:
-- Assumptions:
 - Existing system:
 
-## Requirements
+## Non-functional requirements
 
-### Functional technical requirements
+| ID    | Category      | Requirement | Verified by |
+| ----- | ------------- | ----------- | ----------- |
+| NFR-1 | Performance   | ...         | ...         |
+| NFR-2 | Reliability   | ...         | ...         |
+| NFR-3 | Scalability   | ...         | ...         |
+| NFR-4 | Accessibility | ...         | ...         |
+| NFR-5 | Compliance    | ...         | ...         |
+| NFR-6 | Observability | ...         | ...         |
 
-- ...
+## Integrations
 
-### Non-functional requirements
+| System | Purpose | Direction | Failure handling |
+| ------ | ------- | --------- | ---------------- |
+| ...    | ...     | ...       | ...              |
 
-- Performance:
-- Reliability:
-- Scalability:
-- Maintainability:
-- Observability:
+## Constraints
 
-## Integrations and dependencies
-
-- External services:
-- Internal services:
-- APIs and contracts:
-- Third-party dependencies:
-
-## Constraints and tradeoffs
-
-- Platform constraints:
-- Time constraints:
-- Migration constraints:
-- Tradeoff:
+- Platform:
+- Timeline:
+- Migration:
 
 ## Rollout
 
-- Implementation approach:
-- Feature flag or staged release:
+- Approach:
+- Feature flags or staged release:
 - Backward compatibility:
 - Rollback plan:
 
-## Risks and unknowns
+## Risks
 
 - ...
