@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
   "name": "shippusharma",
-  "description": "Shippu Sharma agent skills for real engineering and developers, as an installable Claude Code plugin.",
+  "description": "Agent skills by Shippu Sharma, as an installable Claude Code plugin.",
   "owner": {
     "name": "Shippu Sharma",
     "email": "shippusharma00@gmail.com",
@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "shippusharma-skills",
-      "description": "Shippu Sharma agent skills for real engineering and developers — mvp-builder, project-blueprint-builder and more.",
+      "description": "Scope MVPs, write project blueprints, rank a repo's highest-impact improvements, and review skills before publishing.",
       "source": "./",
       "category": "skills",
       "keywords": [

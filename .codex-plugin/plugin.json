@@ -1,7 +1,7 @@
 {
   "name": "shippusharma-skills",
-  "version": "1.0.4",
-  "description": "Shippu Sharma agent skills for real engineering and developers.",
+  "version": "1.0.5",
+  "description": "Agent skills for scoping MVPs, planning projects before code, and improving repositories and skills.",
   "keywords": [
     "skills",
     "agents",
@@ -28,8 +28,5 @@
     "url": "https://github.com/shippusharma/skills/issues"
   },
   "homepage": "https://github.com/shippusharma/skills#readme",
-  "skills": "./skills/",
-  "hooks": {
-    "hooks": {}
-  }
+  "skills": "./skills/"
 }

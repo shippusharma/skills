@@ -3,16 +3,8 @@
 ## Overview
 
 - System purpose:
-- Primary systems involved:
 - Architectural style:
-- Design intent:
-
-## System context
-
-- Users:
-- Platforms:
-- External services:
-- Core workflows:
+- Users and platforms:
 
 ## Context diagram
 
@@ -43,25 +35,29 @@ sequenceDiagram
 
 ## Technical stack
 
-- Frontend:
-- Backend:
-- Database:
-- Hosting:
-- Auth:
-- Messaging/queue:
-- Observability:
+| Layer         | Choice | Reason |
+| ------------- | ------ | ------ |
+| Frontend      | ...    | ...    |
+| Backend       | ...    | ...    |
+| Database      | ...    | ...    |
+| Hosting       | ...    | ...    |
+| Auth          | ...    | ...    |
+| Messaging     | ...    | ...    |
+| Observability | ...    | ...    |
 
-## Components and boundaries
+## Components
 
-| Component | Responsibility | Dependencies | Notes |
-| --------- | -------------- | ------------ | ----- |
-| ...       | ...            | ...          | ...   |
+| Component | Responsibility | Depends on |
+| --------- | -------------- | ---------- |
+| ...       | ...            | ...        |
 
 ## Data flow
 
-| Flow | Trigger | Reads | Writes | Notes |
-| ---- | ------- | ----- | ------ | ----- |
-| ...  | ...     | ...   | ...    | ...   |
+| Flow | Trigger | Reads | Writes |
+| ---- | ------- | ----- | ------ |
+| ...  | ...     | ...   | ...    |
+
+Entities and data contracts are in [SCHEMA](SCHEMA.md). Integrations and rollout are in [TRD](TRD.md).
 
 ## Deployment view
 
@@ -73,31 +69,13 @@ flowchart TD
     API --> Queue[Message Queue]
 ```
 
-## APIs and interfaces
+## Operations
 
-- REST or GraphQL endpoints:
-- Webhooks:
-- Event contracts:
-- Integration points:
-
-## Data model
-
-- Core entities:
-- Relationships:
-- Important fields:
-- Data lifecycle:
-
-## Deployment and operations
-
-- Environment strategy:
-- CI/CD approach:
-- Monitoring and logging:
+- Environments:
+- CI/CD:
+- Monitoring and alerting:
 - Backups and recovery:
-- Rollout plan:
 
-## Decisions, risks, and tradeoffs
+## Risks
 
-- Key decision:
-- Tradeoff:
-- Risk:
-- Open question:
+- ...

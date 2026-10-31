@@ -1,33 +1,28 @@
 # Memory
 
-## Project context
+## Status
 
-- Project summary:
-- Current status:
-- Important constraints:
+- Current phase:
 - Key stakeholders:
 
 ## Decision log
 
-| Decision | Reasoning | Date |
-| -------- | --------- | ---- |
-| ...      | ...       | ...  |
+| Date | Decision | Reason | Rejected alternatives |
+| ---- | -------- | ------ | --------------------- |
+| ...  | ...      | ...    | ...                   |
 
-## Assumptions and constraints
+## Assumptions
 
-- Assumptions:
-- Constraints:
-- Unknowns:
+- ...
 
 ## Open questions
 
-- ...
+| Question | Blocks | Owner |
+| -------- | ------ | ----- |
+| ...      | ...    | ...   |
 
 ## Change history
 
-- Update:
-- Why it changed:
-
-## Notes for future work
-
-- ...
+| Date | Change | Why |
+| ---- | ------ | --- |
+| ...  | ...    | ... |

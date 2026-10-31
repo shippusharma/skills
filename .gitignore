@@ -1,18 +1,13 @@
 node_modules
-*.tsbuildinfo
-build
-dist
-.husky
 
-# env variables
+# Environment variables
 .env*
 
-# Local editor files
+# Editor and OS files
 .DS_Store
 .vscode/
 
-# Temporary files
-*.tmp
+# Logs and temporary files
 *.log
-
+*.tmp
 # npx npm-check-updates -i

@@ -6,7 +6,7 @@
 //   node scripts/skills.mjs sync-version   copy package.json's version into the plugin manifests
 
 import { existsSync, readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
-import { basename, dirname, join, relative, resolve } from 'node:path';
+import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse } from 'yaml';
 
@@ -115,8 +115,10 @@ function validateSkill({ dir, data, body, error }) {
   const lines = body.split('\n').length;
   if (lines > 500) errors.push(`SKILL.md body is ${lines} lines; keep it under 500`);
 
+  const linked = [];
   for (const target of relativeLinks(body)) {
     const path = resolve(dir, decodeURI(target));
+    linked.push(path);
     if (relative(dir, path).startsWith('..')) {
       errors.push(
         `link "${target}" points outside the skill folder, which installed skills can't see`,
@@ -126,7 +128,25 @@ function validateSkill({ dir, data, body, error }) {
     }
   }
 
+  // A file is reachable when SKILL.md links to it or to a folder that contains it.
+  for (const path of filesIn(dir)) {
+    const file = relative(dir, path);
+    if (file === 'SKILL.md' || file === 'LICENSE.txt') continue;
+    if (!linked.some(target => path === target || path.startsWith(target + sep))) {
+      warnings.push(`${file} is not linked from SKILL.md, so agents never read it`);
+    }
+  }
+
   return { errors, warnings };
+}
+
+function filesIn(dir) {
+  return readdirSync(dir, { withFileTypes: true })
+    .filter(entry => !entry.name.startsWith('.'))
+    .flatMap(entry => {
+      const path = join(dir, entry.name);
+      return entry.isDirectory() ? filesIn(path) : [path];
+    });
 }
 
 function relativeLinks(markdown) {

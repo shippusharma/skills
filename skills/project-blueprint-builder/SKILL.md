@@ -1,9 +1,9 @@
 ---
 name: project-blueprint-builder
 description: 'Creates implementation-ready project blueprints for humans and AI agents: PRD, TRD, architecture, schema, security, modules, engineering rules, delivery phases, design, and a decision log. Use when starting a greenfield product, app, or internal tool, planning a major feature or platform change, preparing an engineering handoff, or when the user asks for a PRD, technical spec, architecture doc, or project plan before writing code.'
-license: Apache-2.0
+license: MIT
 metadata:
-  version: '1.3.0'
+  version: '1.4.0'
   author: 'Shippu Sharma'
   email: 'shippusharma00@gmail.com'
   tags: 'planning, blueprint, prd, architecture, security, design'
@@ -24,7 +24,7 @@ To build and validate an idea quickly instead of planning it, use `mvp-builder`.
 
 ## What to ask first
 
-Read the existing codebase and docs first. Then ask only for missing, high-leverage context, all in one message:
+Read the existing codebase and docs first, including `MVP.md` if `mvp-builder` wrote one: its hypothesis, scope, and results seed the PRD. Then ask only for missing, high-leverage context, all in one message:
 
 - Problem and desired outcome
 - Target users and their primary journey
@@ -47,7 +47,7 @@ Default to Standard. Go to Full when any of its triggers apply. Drop to Lite whe
 
 ## Workflow
 
-1. Write the PRD, then the TRD: the why, and the constraints.
+1. Write the PRD, then the TRD: what to build and why, then the technical requirements and constraints.
 2. Add ARCHITECTURE and SCHEMA: system shape, data flow, and contracts.
 3. Add SECURITY and MODULES when the depth calls for them.
 4. Add RULES, DESIGN, and PHASES: how it's built, how it feels, and in what order.
@@ -60,21 +60,21 @@ Start each document from its template in [assets/templates/](assets/templates/),
 
 1. Keep one source of truth per topic. Each fact lives in exactly one document, and other documents link to it.
 
-   | Document     | Owns                                            |
-   | ------------ | ----------------------------------------------- |
-   | PRD          | Why, who, what, and how success is measured     |
-   | TRD          | Technical constraints, integrations, rollout    |
-   | ARCHITECTURE | System shape, components, data flow, deployment |
-   | SCHEMA       | Entities, relationships, invariants, contracts  |
-   | SECURITY     | Trust boundaries, threats, protections          |
-   | MODULES      | Ownership, boundaries, interfaces               |
-   | RULES        | Engineering standards and guardrails            |
-   | PHASES       | Delivery order and exit criteria                |
-   | DESIGN       | User experience and interface direction         |
-   | MEMORY       | Decisions, assumptions, open questions, changes |
+   | Document     | Owns                                                    |
+   | ------------ | ------------------------------------------------------- |
+   | PRD          | Why, who, functional requirements, success metrics      |
+   | TRD          | Non-functional requirements, integrations, rollout      |
+   | ARCHITECTURE | Stack, components, data flow, deployment, operations    |
+   | SCHEMA       | Entities, relationships, invariants, contracts          |
+   | SECURITY     | Sensitive assets, trust boundaries, threats, mitigation |
+   | MODULES      | Ownership, boundaries, interfaces                       |
+   | RULES        | Project-specific commands, standards, and merge checks  |
+   | PHASES       | Delivery order, requirements covered, exit criteria     |
+   | DESIGN       | Journey, screens, states, interface direction           |
+   | MEMORY       | Decisions, assumptions, open questions, changes         |
 
 2. Prefer the current codebase, existing docs, and stated constraints over invented defaults. Give every technology choice a one-line reason tied to a requirement.
-3. Replace generic advice like "ensure scalability" with a decision, a number, or an open question. Give every requirement a testable acceptance criterion.
+3. Replace generic advice like "ensure scalability" with a decision, a number, or an open question. Give every requirement an ID (`FR-n` in the PRD, `NFR-n` in the TRD) and a testable acceptance criterion, and list under each phase the IDs it delivers.
 4. When a request has several reasonable readings, list them and say which one you picked.
 5. Keep sections short and prefer tables to long paragraphs. Cut any section that doesn't inform the next decision.
 6. For anything touching auth, payments, personal data, or multi-tenancy, cover least privilege, input validation, secret handling, audit logging, and recovery, at any depth.
@@ -91,11 +91,11 @@ Write the documents to `blueprint/`, using the template filenames (`blueprint/PR
 
 ## Tone by audience
 
-| Mode                | Use when                               | Style                                                                           |
-| ------------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
-| Agent prompting     | Another agent will build from the docs | Imperative, unambiguous labels, explicit decision points and verification steps |
-| Human handoff       | People review or own the plan          | A brief "why", scannable tradeoffs, what's risky and what's still open          |
-| Ponytail minimalism | The user wants the bare minimum        | Smallest document set, one default per decision, one line wherever possible     |
+| Mode            | Use when                               | Style                                                                           |
+| --------------- | -------------------------------------- | ------------------------------------------------------------------------------- |
+| Agent prompting | Another agent will build from the docs | Imperative, unambiguous labels, explicit decision points and verification steps |
+| Human handoff   | People review or own the plan          | A brief "why", scannable tradeoffs, what's risky and what's still open          |
+| Minimal         | The user wants the bare minimum        | Smallest document set, one default per decision, one line wherever possible     |
 
 ## Example
 

@@ -1,9 +1,9 @@
 ---
 name: repo-impact-optimizer
 description: 'Audits an existing repository and ranks the highest-leverage improvements to adoption, clarity, and trust, covering README positioning, quick start, examples, packaging, discoverability, and contributor experience. Use when the user wants a project to be more useful, adopted, or credible, asks what to improve first, or wants their README, onboarding, or open-source presentation reviewed. Works well for libraries, CLIs, and skill or plugin collections.'
-license: Apache-2.0
+license: MIT
 metadata:
-  version: '1.1.0'
+  version: '1.1.1'
   author: 'Shippu Sharma'
   email: 'shippusharma00@gmail.com'
   tags: 'open-source, readme, onboarding, adoption, developer-experience'

@@ -6,60 +6,28 @@
 - Problem statement:
 - Target users:
 - Primary outcome:
-- Release type:
-
-## Context
-
 - Why now:
-- Existing system or starting point:
-- Constraints:
-- Non-goals:
-
-## Scope
-
-### In scope
-
-- ...
-
-### Out of scope
-
-- ...
-
-### MVP
-
-- ...
-
-### Later
-
-- ...
-
-## Success
-
-- User success metrics:
-- Business success metrics:
-- Measurement approach:
+- Current alternative:
 
 ## Requirements
 
-### Functional
+| ID   | Requirement | Acceptance criterion | Release     |
+| ---- | ----------- | -------------------- | ----------- |
+| FR-1 | ...         | ...                  | MVP / Later |
+
+Non-functional requirements are in [TRD](TRD.md#non-functional-requirements).
+
+## Out of scope
 
 - ...
 
-### Non-functional
+## Success metrics
 
-- Performance:
-- Reliability:
-- Accessibility:
-- Compliance:
-- Observability:
+| Metric | Target | How it's measured |
+| ------ | ------ | ----------------- |
+| ...    | ...    | ...               |
 
-### Acceptance criteria
+## Risks and dependencies
 
-- ...
-
-## Risks and decisions
-
-- Assumptions:
 - Risks:
-- Open questions:
 - Dependencies:

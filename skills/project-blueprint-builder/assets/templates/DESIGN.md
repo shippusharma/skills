@@ -1,40 +1,30 @@
 # Design
 
-## Experience vision
+## Primary journey
 
-- Primary user journey:
-- Intended experience:
-- Key moments of delight or friction:
+1. ...
 
-## Information architecture
+## Screens
 
-- Main screens:
+| Screen | Purpose | Key components | Requirements |
+| ------ | ------- | -------------- | ------------ |
+| ...    | ...     | ...            | FR-...       |
+
+## States
+
+| State   | Behavior and copy |
+| ------- | ----------------- |
+| Empty   | ...               |
+| Loading | ...               |
+| Error   | ...               |
+| Success | ...               |
+
+## Navigation
+
 - Navigation model:
-- Key components:
-- Information hierarchy:
-
-## Interaction design
-
-- How users complete core tasks:
-- Feedback and state handling:
-- Empty states and error states:
-- Success and failure patterns:
-
-## Visual direction
-
-- Style and tone:
-- Brand or UI principles:
-- Accessibility considerations:
 - Responsive behavior:
 
-## Content and UX notes
+## Visual and content direction
 
+- Design system or component library:
 - Voice and tone:
-- Empty-state copy:
-- Validation messaging:
-- Error handling copy:
-
-## Design questions
-
-- Question 1:
-- Question 2:

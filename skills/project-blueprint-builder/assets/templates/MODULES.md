@@ -1,33 +1,23 @@
 # Modules
 
-## Module overview
-
-- Core modules:
-- Module responsibilities:
-- Cross-cutting concerns:
-
 ## Module boundaries
 
 | Module | Responsibility | Depends on | Public interface | Owner |
 | ------ | -------------- | ---------- | ---------------- | ----- |
 | ...    | ...            | ...        | ...              | ...   |
 
-## Interfaces and contracts
+Payload and event shapes are in [SCHEMA](SCHEMA.md). Delivery order is in [PHASES](PHASES.md).
 
-- Internal APIs:
-- Shared types:
-- Events or messages:
-- Contract versioning:
+## Cross-cutting concerns
+
+- ...
 
 ## Dependency risks
 
-- Tight coupling risk:
-- Shared-state risk:
+- Tight coupling:
+- Shared state:
 - Mitigation:
 
-## Ownership and delivery
+## Hand-off notes
 
-- Primary owner:
-- Secondary owner:
-- Delivery sequence:
-- Hand-off notes:
+- ...

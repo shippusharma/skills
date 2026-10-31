@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency: ${{ github.workflow }}-${{ github.ref }}
+
+jobs:
+  release:
+    name: Version and tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          # Changesets needs existing tags to skip released versions, and history to link changelog entries to commits.
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Open the version PR, or tag the release once it merges
+        uses: changesets/action@v1
+        with:
+          version: npm run semver:version
+          publish: npm run semver:tag
+          commit: 'chore: version skills'
+          title: 'chore: version skills'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

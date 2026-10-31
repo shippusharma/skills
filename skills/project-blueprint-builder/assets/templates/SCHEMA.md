@@ -1,39 +1,16 @@
 # Schema
 
-## Data overview
-
-- Primary domain objects:
-- Storage approach:
-- Data ownership:
-- Data lifecycle:
-
 ## Entities
 
-| Entity | Purpose | Key fields | Constraints | Retention |
-| ------ | ------- | ---------- | ----------- | --------- |
-| ...    | ...     | ...        | ...         | ...       |
+| Entity | Purpose | Key fields | Constraints | Owner | Retention |
+| ------ | ------- | ---------- | ----------- | ----- | --------- |
+| ...    | ...     | ...        | ...         | ...   | ...       |
 
 ## Relationships
 
-| From | To  | Relationship | Cardinality | Notes |
-| ---- | --- | ------------ | ----------- | ----- |
-| ...  | ... | ...          | ...         | ...   |
-
-## Validation and invariants
-
-- Required fields:
-- Unique constraints:
-- Referential integrity:
-- Business rules:
-
-## Data contracts
-
-- Input payloads:
-- Output payloads:
-- Default values:
-- Backward compatibility:
-
-## Relationship diagram
+| From | To  | Relationship | Cardinality |
+| ---- | --- | ------------ | ----------- |
+| ...  | ... | ...          | ...         |
 
 ```mermaid
 erDiagram
@@ -41,14 +18,23 @@ erDiagram
     ENTITY2 ||--o{ ENTITY3 : contains
 ```
 
-## Storage and retention
+## Invariants
 
-- Database or storage choice:
-- Retention policy:
-- Backup or archival needs:
+- ...
 
-## Risks and open questions
+## Data contracts
 
-- Data quality concern:
-- Migration concern:
-- Open question:
+| Contract | Producer → consumer | Payload | Compatibility rule |
+| -------- | ------------------- | ------- | ------------------ |
+| ...      | ...                 | ...     | ...                |
+
+## Retention and deletion
+
+- Default retention:
+- Deletion requests:
+- Archival:
+
+## Migration
+
+- Existing data to migrate:
+- Data quality risks:

@@ -1,29 +1,25 @@
 # Security Policy
 
-## Reporting a Vulnerability
+## Scope
 
-If you discover a security vulnerability, please report it responsibly by emailing:
+- Skill instructions that could lead an agent to expose secrets, run unsafe commands, or act against the user's intent.
+- The repository's scripts and GitHub workflows.
 
-**📧 shippusharma00@gmail.com**
+## Reporting a vulnerability
 
-When reporting a vulnerability, please include as much information as possible, such as:
+Email **shippusharma00@gmail.com**. Don't open a public issue.
 
-- A description of the vulnerability
-- Steps to reproduce the issue
-- Potential impact
-- Proof of concept (if available)
-- Suggested mitigation (optional)
+Include:
 
-## Response Process
+- what the vulnerability is and which skill or file it affects,
+- steps to reproduce, or a proof of concept,
+- the impact you expect,
+- a suggested fix, if you have one.
 
-After receiving your report, I will:
+## What happens next
 
-1. Acknowledge receipt of the report as soon as possible.
-2. Investigate and validate the issue.
-3. Work on a fix if the vulnerability is confirmed.
-4. Release a security update when appropriate.
-5. Credit the reporter (if desired) after the issue has been resolved.
+1. I acknowledge your report.
+2. I confirm the issue and work on a fix.
+3. I release the fix and, if you'd like, credit you.
 
-## Responsible Disclosure
-
-Thank you for helping keep this project and its users secure. ❤️
+Please don't disclose the issue publicly until the fix is released.
