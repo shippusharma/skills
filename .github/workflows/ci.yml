@@ -32,5 +32,8 @@ jobs:
       - name: Validate skills
         run: npm run validate
 
+      - name: Validate the Claude Code plugin and marketplace
+        run: npx --yes @anthropic-ai/claude-code@2.1.312 plugin validate .
+
       - name: Check formatting
         run: npm run format-check
