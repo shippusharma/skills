@@ -12,13 +12,13 @@ concurrency: ${{ github.workflow }}-${{ github.ref }}
 
 jobs:
   release:
-    name: Version and tag
+    name: Version and release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          # Changesets needs existing tags to skip released versions, and history to link changelog entries to commits.
+          # The changelog links each entry to the commit that added its changeset.
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -30,12 +30,30 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Open the version PR, or tag the release once it merges
+      - name: Open or update the version PR
+        id: changesets
         uses: changesets/action@v1
         with:
           version: npm run semver:version
-          publish: npm run semver:tag
           commit: 'chore: version skills'
           title: 'chore: version skills'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Not the action's publish step: it only releases when the CLI prints "New tag:", which Changesets v3 no longer does.
+      - name: Release the version in package.json
+        if: steps.changesets.outputs.hasChangesets == 'false'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          version=$(node -p "require('./package.json').version")
+          if gh release view "v$version" > /dev/null 2>&1; then
+            echo "v$version is already released."
+            exit 0
+          fi
+          awk -v heading="## $version" '$0 == heading {found = 1; next} /^## / {found = 0} found' CHANGELOG.md > notes.md
+          if [ ! -s notes.md ]; then
+            echo "CHANGELOG.md has no section for $version." >&2
+            exit 1
+          fi
+          gh release create "v$version" --target "$GITHUB_SHA" --title "v$version" --notes-file notes.md

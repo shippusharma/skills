@@ -50,8 +50,7 @@
     "cleanup": "rm -rf node_modules",
     "semver:changeset": "changeset",
     "semver:status": "changeset status --verbose",
-    "semver:version": "changeset version && npm run sync-version",
-    "semver:tag": "changeset tag"
+    "semver:version": "changeset version && npm run sync-version"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^1.0.1",
