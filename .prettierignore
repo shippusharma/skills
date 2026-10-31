@@ -1,6 +1,9 @@
 # Prettier also skips everything in .gitignore.
 package-lock.json
 
+# Eval fixtures stay exactly as written: their flaws are what the evals test.
+evals/fixtures/
+
 # Skills installed locally while testing
 skills-lock.json
 .agents

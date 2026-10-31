@@ -1,0 +1,28 @@
+schema_version: '1.0'
+name: reviewer-confirm-ready-skill
+description: A solid skill; the review should say so and not invent problems.
+tags: [skill-quality-reviewer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: Is my release-notes skill ready to publish?
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: says-publishable
+    criteria: The response's verdict is that the release-notes skill is ready to publish, possibly with optional minor suggestions.
+  - type: llm
+    name: no-false-failures
+    criteria: >-
+      Doesn't report a spec failure or a problem that isn't in the files, such as a missing "when
+      to use", a broken link to references/style.md, or an invalid name.
+  - type: tool_used
+    name: fired-skill-quality-reviewer
+    tool: Skill
+    input_match: skill-quality-reviewer
+    min: 1
+expected_outcome: Publishable, with no invented problems.

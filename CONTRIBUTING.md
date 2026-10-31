@@ -26,14 +26,32 @@ npm install
 3. Put detail the agent reads on demand in `references/` and files it fills in under `assets/templates/`. Link each one from SKILL.md.
 4. Include a realistic example prompt and the shape of a good response.
 5. Add the skill to the table in `README.md`.
-6. Run `npm run check`, then add a changeset with `npm run semver:changeset`.
+6. Add [eval cases](#evals) under `evals/<name>/`: at least four prompts that should trigger the skill and one near miss that shouldn't.
+7. Run `npm run check`, then add a changeset with `npm run semver:changeset`.
+
+## Evals
+
+`evals/` holds behavior tests for every skill, run by Claude Code's eval runner. Each case runs a prompt with and without these skills and grades both results, so the score shows what the skills add.
+
+```bash
+npm run eval -- --tag mvp-builder   # one skill's cases
+npm run eval -- --case 'repo-*'     # cases whose name matches
+npm run eval                        # every case
+```
+
+- You need [Claude Code](https://claude.com/claude-code), signed in. Each run is a full agent session on your account. On Opus 5.5, one case costs $0.25–1.20 per run across both arms, so the full suite (20 cases, 3 runs each) is about $30, half of it `project-blueprint-builder`. Start with one skill.
+- Cases are tagged `should-fire` or `should-not-fire`. Graders check what the skill produced, not only whether it ran.
+- A case that needs files has a `scaffold.sh` that copies a fixture from `evals/fixtures/`. Fixture files named `*.fixture` lose the suffix when copied, so tools never mistake a fixture's `SKILL.md` or `package.json` for a real one.
+- `npm run eval` runs each case's `scaffold.sh` on your machine. Read the scaffold scripts in a pull request before running its evals.
+
+When you change a skill's behavior, run its evals before and after the change, and add a case that covers the new behavior.
 
 ## Pull requests
 
 Before opening one, make sure that:
 
 - `npm run check` passes.
-- You tried each changed skill with at least one agent.
+- You ran the evals for each changed skill (`npm run eval -- --tag <skill>`).
 - `metadata.version` is bumped for every skill whose behavior changed.
 - A changeset describes the change.
 

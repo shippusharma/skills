@@ -1,0 +1,44 @@
+schema_version: '1.0'
+name: mvp-cut-retro-tool-v1
+description: An overgrown v1 feature list with a fixed team and deadline.
+tags: [mvp-builder, should-fire]
+execution:
+  prompt: >-
+    Here's the v1 plan for our team retrospective tool: SSO, Slack and Teams integrations,
+    custom templates, anonymous voting, AI summaries, an analytics dashboard, dark mode, mobile
+    apps, and action items that sync to Jira. Two engineers, three weeks. Cut it down to what
+    actually matters for launch.
+  max_turns: 8
+  timeout_seconds: 180
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: one-core-flow
+    criteria: >-
+      For a team retrospective tool's launch, the response keeps one end-to-end flow (running a
+      retro and capturing its items) and moves at least six of these out of the launch build, as
+      postponed or handled manually: SSO, Slack and Teams integrations, custom templates,
+      anonymous voting, AI summaries, an analytics dashboard, dark mode, mobile apps, and Jira
+      sync.
+  - type: llm
+    name: cuts-are-justified
+    criteria: >-
+      For each feature it keeps, says why the launch can't work without it; it keeps nothing
+      only because it would be nice to have.
+  - type: llm
+    name: launch-signal
+    criteria: >-
+      Says how the team will know the launch worked, with a measurable signal tied to real usage:
+      a number, a threshold, or a decision it unblocks.
+  - type: regex
+    name: build-fake-defer-labels
+    pattern: '(?=[\s\S]*\bFake\b)[\s\S]*\bDefer'
+    weight: 0.5
+  - type: tool_used
+    name: fired-mvp-builder
+    tool: Skill
+    input_match: mvp-builder
+    min: 1
+expected_outcome: One retro flow survives, most features are postponed or manual, and launch success is measurable.

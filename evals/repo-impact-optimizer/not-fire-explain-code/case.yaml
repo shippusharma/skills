@@ -1,0 +1,35 @@
+schema_version: '1.0'
+name: repo-not-fire-explain-code
+description: A code walkthrough inside a repo; the user wants an explanation, not an audit.
+tags: [repo-impact-optimizer, should-not-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: Walk me through what bin/tidy.js does, step by step.
+  max_turns: 8
+  timeout_seconds: 180
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: explains-code
+    criteria: >-
+      Explains the script's behavior: the --version flag, reading a file or stdin, stripping
+      trailing commas, optional key sorting, indentation, and the --check exit code.
+  - type: llm
+    name: no-audit
+    criteria: Doesn't turn the answer into a repository audit or a ranked list of improvements.
+  - type: regex
+    name: no-impact-table
+    pattern: '\|\s*Impact\s*\|'
+    flags: i
+    match: not_contains
+    weight: 0.5
+  - type: tool_used
+    name: did-not-fire-repo-impact-optimizer
+    tool: Skill
+    input_match: repo-impact-optimizer
+    min: 0
+    max: 0
+expected_outcome: A step-by-step explanation of the script with no audit.

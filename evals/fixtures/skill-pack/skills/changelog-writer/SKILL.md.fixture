@@ -1,0 +1,11 @@
+---
+name: changelog-writer
+description: 'Adds an entry to CHANGELOG.md from commits since the last tag. Use when the user asks to update the changelog before a release.'
+license: MIT
+---
+
+# Changelog Writer
+
+1. Find the last tag with `git describe --tags --abbrev=0`.
+2. List commits since that tag.
+3. Add a section for the new version to the top of CHANGELOG.md, grouped by Added, Changed, and Fixed.

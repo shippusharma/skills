@@ -1,0 +1,44 @@
+schema_version: '1.0'
+name: mvp-waitlist-prototype
+description: Build a thin slice inside an existing app and run it.
+tags: [mvp-builder, should-fire, builds]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: >-
+    Add a waitlist to this landing page so I can find out whether people actually want Plotline
+    before I build it. Visitors leave their email, and I need a way to see who signed up.
+  max_turns: 35
+  timeout_seconds: 900
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit, Bash]
+runs: 3
+graders:
+  - type: llm
+    name: waitlist-works
+    focus: trace
+    criteria: >-
+      In the code the agent wrote, the server accepts an email from a form on the page, rejects a
+      missing or invalid email on the server, stores submissions (a file or memory is fine), and
+      gives the owner a way to see the list. No framework or new dependency is added.
+  - type: llm
+    name: ran-it
+    focus: trace
+    criteria: >-
+      Before reporting done, the agent ran the code (started the server and sent a request, or ran
+      a script that exercised the signup), or it states exactly what it could not verify.
+  - type: regex
+    name: no-new-dependencies
+    target: { source: file, path: package.json }
+    pattern: '"dependencies"'
+    match: not_contains
+    weight: 0.5
+  - type: file_exists
+    name: mvp-brief-written
+    path: MVP.md
+    weight: 0.5
+  - type: tool_used
+    name: fired-mvp-builder
+    tool: Skill
+    input_match: mvp-builder
+    min: 1
+expected_outcome: A dependency-free waitlist that validates email server-side, verified by running it.

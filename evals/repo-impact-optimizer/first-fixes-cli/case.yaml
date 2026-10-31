@@ -1,0 +1,31 @@
+schema_version: '1.0'
+name: repo-first-fixes-cli
+description: An open question about what to improve first in a small CLI.
+tags: [repo-impact-optimizer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: What should I fix first so more people actually use this CLI?
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: catches-broken-install
+    criteria: 'The README installs `tidyjson`, but the package is named `tidy-json`, so the documented install command fails. The response points this out.'
+  - type: llm
+    name: ranked-and-specific
+    criteria: Gives a ranked list of no more than seven changes, each naming the file to change and the concrete edit.
+  - type: llm
+    name: readme-first-screen
+    criteria: >-
+      Recommends that the top of README.md say what the tool does and show the install command,
+      instead of opening with a feature list.
+  - type: tool_used
+    name: fired-repo-impact-optimizer
+    tool: Skill
+    input_match: repo-impact-optimizer
+    min: 1
+expected_outcome: The broken install command ranks near the top, and every item names a file and a concrete edit.

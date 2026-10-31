@@ -1,0 +1,46 @@
+---
+name: release-notes
+description: 'Writes user-facing release notes from the merged pull requests or commits between two tags. Use when the user asks for release notes, a changelog entry for a version, or a summary of what shipped.'
+license: MIT
+metadata:
+  version: '1.0.0'
+---
+
+# Release Notes
+
+Turn the changes in a release into notes users can scan in under a minute.
+
+## When to use
+
+- Writing release notes or a changelog entry for a version
+- Summarizing what shipped between two tags
+
+To write a single commit message, use a commit-message skill instead.
+
+## Workflow
+
+1. Find the range: the previous tag and the new one. If the user didn't name them, use the two most recent tags and say so.
+2. List the merged pull requests in that range with `git log --merges --oneline <previous>..<new>`. If there are none, list the commits with `git log --oneline <previous>..<new>`.
+3. Drop changes users can't see: refactors, tests, CI, and dependency bumps with no user impact.
+4. Group the rest under **Breaking**, **Added**, **Changed**, and **Fixed**, in that order, and skip empty groups.
+5. Write one line per change in the user's terms, ending with a link to its pull request, or to its commit when there is none. Give every breaking change its migration step.
+
+Word each line using [the style guide](references/style.md).
+
+## Output
+
+One Markdown section headed with the version and date, ready to paste into CHANGELOG.md or a GitHub release.
+
+## Example
+
+**Prompt:** "Write release notes for v2.3.0."
+
+**Good response shape:**
+
+```markdown
+## 2.3.0 (2026-09-14)
+
+### Fixed
+
+- Exports no longer drop rows with empty dates ([#412](https://github.com/acme/app/pull/412)).
+```

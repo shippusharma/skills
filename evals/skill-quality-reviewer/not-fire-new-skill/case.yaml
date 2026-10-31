@@ -1,0 +1,27 @@
+schema_version: '1.0'
+name: reviewer-not-fire-new-skill
+description: Writing a new skill is not reviewing one.
+tags: [skill-quality-reviewer, should-not-fire]
+execution:
+  prompt: Write a new skill that formats SQL queries consistently. Just show me the SKILL.md.
+  max_turns: 6
+  timeout_seconds: 180
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: drafts-skill
+    criteria: >-
+      Shows a complete new SKILL.md: frontmatter with a name and a description that says when to
+      use it, then instructions for formatting SQL.
+  - type: llm
+    name: not-a-review
+    criteria: Doesn't review or score an existing skill; no verdict, rubric scores, or ranked fixes.
+  - type: tool_used
+    name: did-not-fire-skill-quality-reviewer
+    tool: Skill
+    input_match: skill-quality-reviewer
+    min: 0
+    max: 0
+expected_outcome: A new SQL-formatting SKILL.md, not a review.

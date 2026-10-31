@@ -1,0 +1,43 @@
+schema_version: '1.0'
+name: blueprint-light-plan-csv-export
+description: A narrow change where the user asks for a light plan.
+tags: [project-blueprint-builder, should-fire, builds]
+execution:
+  prompt: >-
+    Before I change anything, write a short plan in blueprint/ for adding CSV export to our
+    reports page. Keep it light; it's about a two-day change.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+  disallowed_tools: [Bash, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: csv-specific-risks
+    focus: trace
+    criteria: >-
+      The plan the agent wrote names at least one risk specific to CSV export and how the change
+      handles it: formula injection from cells starting with =, +, -, or @; character encoding;
+      or very large exports.
+  - type: llm
+    name: testable-acceptance
+    focus: trace
+    criteria: >-
+      The plan the agent wrote gives acceptance criteria someone could test, such as which
+      columns appear and how empty values are written.
+  - type: file_exists
+    name: no-architecture-doc
+    path: blueprint/ARCHITECTURE.md
+    exists: false
+    weight: 0.5
+  - type: file_exists
+    name: no-security-doc
+    path: blueprint/SECURITY.md
+    exists: false
+    weight: 0.5
+  - type: tool_used
+    name: fired-blueprint-builder
+    tool: Skill
+    input_match: project-blueprint-builder
+    min: 1
+expected_outcome: A short plan with testable criteria and CSV-specific risks, without heavyweight documents.

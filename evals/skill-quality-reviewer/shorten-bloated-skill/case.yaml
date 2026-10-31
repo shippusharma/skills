@@ -1,0 +1,39 @@
+schema_version: '1.0'
+name: reviewer-shorten-bloated-skill
+description: Rewrite a repetitive skill shorter without losing any step.
+tags: [skill-quality-reviewer, should-fire, builds]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: onboarding-checklist/SKILL.md is way too long. Make it shorter without changing what it does.
+  max_turns: 20
+  timeout_seconds: 400
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+  disallowed_tools: [Bash, NotebookEdit]
+runs: 3
+graders:
+  - type: regex
+    name: repeated-sections-removed
+    target: { source: file, path: onboarding-checklist/SKILL.md }
+    pattern: '^## (Summary of the steps|Remember|Recap)'
+    flags: m
+    match: not_contains
+  - type: llm
+    name: keeps-every-step
+    focus: { source: file, path: onboarding-checklist/SKILL.md }
+    criteria: >-
+      The file still contains all five steps with their specifics: the acme/engineering GitHub
+      team, access requests in #it-requests, an onboarding buddy from the new hire's team, a
+      30-minute day-one session running `make bootstrap`, and docs/first-week.md.
+  - type: regex
+    name: name-unchanged
+    target: { source: file, path: onboarding-checklist/SKILL.md }
+    pattern: '^name: onboarding-checklist$'
+    flags: m
+    weight: 0.5
+  - type: tool_used
+    name: fired-skill-quality-reviewer
+    tool: Skill
+    input_match: skill-quality-reviewer
+    min: 1
+expected_outcome: The recap sections are gone and all five specific steps remain.

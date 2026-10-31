@@ -81,6 +81,7 @@ skills/
 └── skill-quality-reviewer/      SKILL.md, references/
 scripts/skills.mjs               list, validate, and sync-version
 spec/agent-skills-spec.md        authoring rules and repo conventions
+evals/                           behavior tests for each skill, with fixtures
 .claude-plugin/                  Claude Code plugin and marketplace manifests
 .codex-plugin/                   Codex plugin manifest
 .github/workflows/               CI, and release automation with Changesets
@@ -92,9 +93,10 @@ spec/agent-skills-spec.md        authoring rules and repo conventions
 npm install
 npm run list-skills   # see every skill and its version
 npm run check         # validate skills and check formatting
+npm run eval -- --tag mvp-builder   # run one skill's evals (needs Claude Code)
 ```
 
-To add a skill, create `skills/<name>/SKILL.md` following the [authoring guide](spec/agent-skills-spec.md), list it in this README, and add a changeset with `npm run semver:changeset`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, and open an issue before large changes.
+To add a skill, create `skills/<name>/SKILL.md` following the [authoring guide](spec/agent-skills-spec.md), list it in this README, add eval cases under `evals/<name>/`, and add a changeset with `npm run semver:changeset`. See [CONTRIBUTING.md](CONTRIBUTING.md) for the full workflow, and open an issue before large changes.
 
 ## Security
 

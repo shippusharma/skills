@@ -1,0 +1,40 @@
+schema_version: '1.0'
+name: blueprint-refund-tool-spec
+description: An explicit PRD and spec request that touches payments.
+tags: [project-blueprint-builder, should-fire, builds]
+execution:
+  prompt: >-
+    Write a PRD and technical spec for an internal tool that lets support agents refund up to
+    $200 per order without involving engineering. Payments go through Stripe. Put them in
+    blueprint/PRD.md and blueprint/TRD.md, with access control and audit logging in
+    blueprint/SECURITY.md.
+  max_turns: 50
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+  disallowed_tools: [Bash, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: limit-is-testable
+    focus: { source: file, path: blueprint/PRD.md }
+    criteria: >-
+      The $200-per-order refund limit is a requirement whose acceptance criterion says the
+      server rejects larger refunds, not only that the interface hides them.
+  - type: llm
+    name: stripe-failures
+    focus: { source: file, path: blueprint/TRD.md }
+    criteria: >-
+      This spec says what happens when the Stripe refund call fails or times out, and prevents
+      duplicate refunds, for example with idempotency keys.
+  - type: llm
+    name: audit-and-access
+    focus: { source: file, path: blueprint/SECURITY.md }
+    criteria: >-
+      Every refund is recorded in an audit log with who issued it, the order, the amount, and the
+      reason, and only authorized support roles can issue refunds.
+  - type: tool_used
+    name: fired-blueprint-builder
+    tool: Skill
+    input_match: project-blueprint-builder
+    min: 1
+expected_outcome: The limit is enforced and testable, Stripe failures are idempotent, and refunds are audited.

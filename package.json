@@ -47,6 +47,7 @@
     "check": "npm run validate && npm run format-check",
     "format": "prettier --write .",
     "format-check": "prettier --check .",
+    "eval": "claude plugin eval . --scaffold --trust-plugin --allow-tools Write Edit Bash --judge-model sonnet --no-publish",
     "cleanup": "rm -rf node_modules",
     "semver:changeset": "changeset",
     "semver:status": "changeset status --verbose",

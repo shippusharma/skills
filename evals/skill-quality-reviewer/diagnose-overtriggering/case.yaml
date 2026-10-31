@@ -1,0 +1,33 @@
+schema_version: '1.0'
+name: reviewer-diagnose-overtriggering
+description: A skill that fires on unrelated requests because its description is too broad.
+tags: [skill-quality-reviewer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: >-
+    My git-helper skill fires on almost every request, even when I'm only asking about Python
+    syntax. Why, and how do I fix it?
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: finds-cause
+    criteria: >-
+      Identifies the description ("anything involving code, files, the terminal, or projects") as
+      the reason the skill fires on unrelated requests.
+  - type: llm
+    name: narrowed-description
+    criteria: Proposes a replacement description limited to Git tasks such as staging, committing, and pushing, saying when to use it.
+  - type: llm
+    name: near-miss-check
+    criteria: Shows at least one request the new description should not fire on, such as a Python syntax question.
+  - type: tool_used
+    name: fired-skill-quality-reviewer
+    tool: Skill
+    input_match: skill-quality-reviewer
+    min: 1
+expected_outcome: The broad description is the cause; a Git-only description is proposed and checked against a near miss.

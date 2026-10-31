@@ -1,0 +1,47 @@
+schema_version: '1.0'
+name: blueprint-plan-client-portal
+description: A greenfield product holding sensitive data, planned before any code.
+tags: [project-blueprint-builder, should-fire, builds]
+execution:
+  prompt: >-
+    We're starting a SaaS where small law firms store client documents and share them with
+    their clients through a portal. Plan it before we write code. Put the documents in
+    blueprint/, with the requirements in blueprint/PRD.md, threats and mitigations in
+    blueprint/SECURITY.md, and the delivery order in blueprint/PHASES.md.
+  max_turns: 50
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+  disallowed_tools: [Bash, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: security-is-specific
+    focus: { source: file, path: blueprint/SECURITY.md }
+    criteria: >-
+      This security plan for a document portal used by law firms and their clients gives a
+      concrete mitigation for each of these risks: one firm or client seeing another's
+      documents, shared links leaking, and lawyers and clients needing different permissions.
+  - type: llm
+    name: testable-requirements
+    focus: { source: file, path: blueprint/PRD.md }
+    criteria: >-
+      Every requirement in this document has an ID and an acceptance criterion that can be
+      tested: a number, a threshold, or an observable result.
+  - type: llm
+    name: phases-traced
+    focus: { source: file, path: blueprint/PHASES.md }
+    criteria: >-
+      Every phase in this delivery plan lists the requirement IDs it delivers and has exit
+      criteria that someone other than the author could check.
+  - type: regex
+    name: no-placeholders
+    target: { source: file, path: blueprint/PHASES.md }
+    pattern: '\|\s*\.\.\.\s*\||\bTBD\b'
+    match: not_contains
+    weight: 0.5
+  - type: tool_used
+    name: fired-blueprint-builder
+    tool: Skill
+    input_match: project-blueprint-builder
+    min: 1
+expected_outcome: Security covers tenant isolation, link sharing, and roles; requirements are testable and traced into phases.

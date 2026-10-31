@@ -1,5 +1,8 @@
 node_modules
 
+# Eval run output
+evals/results/
+
 # Environment variables
 .env*
 

@@ -1,0 +1,31 @@
+schema_version: '1.0'
+name: repo-readme-onboarding-review
+description: A narrow request to review the README and onboarding.
+tags: [repo-impact-optimizer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: Review my README and onboarding. Be specific.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: concrete-changes
+    criteria: >-
+      Every recommendation names an exact change (text to add, a section to move, a command to
+      fix), with no generic advice such as "improve the docs".
+  - type: llm
+    name: example-output
+    criteria: Recommends showing a short example of messy JSON input and the tidied output.
+  - type: llm
+    name: catches-broken-install
+    criteria: 'The README installs `tidyjson`, but the package is named `tidy-json`, so the documented install command fails. The response points this out.'
+  - type: tool_used
+    name: fired-repo-impact-optimizer
+    tool: Skill
+    input_match: repo-impact-optimizer
+    min: 1
+expected_outcome: Exact README edits, including fixing the install command and adding an example.

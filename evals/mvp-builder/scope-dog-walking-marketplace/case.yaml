@@ -1,0 +1,40 @@
+schema_version: '1.0'
+name: mvp-scope-dog-walking-marketplace
+description: A raw marketplace idea; the user wants advice, not code.
+tags: [mvp-builder, should-fire]
+execution:
+  prompt: >-
+    I'm thinking about a marketplace where dog owners book vetted walkers in their
+    neighborhood. Before I write any code: what should the first version include, and how
+    will I know it's working? Don't build anything yet.
+  max_turns: 8
+  timeout_seconds: 180
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: testable-hypothesis
+    criteria: >-
+      States one hypothesis that names a specific user, the behavior expected of them, and a
+      measurable signal with a number or threshold that would confirm or refute it.
+  - type: llm
+    name: scope-is-cut
+    criteria: >-
+      Limits what gets built to one core flow (such as an owner requesting a walk and a walker
+      accepting it), names at least one thing to handle manually instead of building (such as
+      vetting walkers by hand or taking payment outside the app), and explicitly postpones at
+      least three features.
+  - type: llm
+    name: first-action
+    criteria: Ends with a next step concrete enough to start today, not a generic "start building".
+  - type: regex
+    name: build-fake-defer-labels
+    pattern: '(?=[\s\S]*\bFake\b)[\s\S]*\bDefer'
+    weight: 0.5
+  - type: tool_used
+    name: fired-mvp-builder
+    tool: Skill
+    input_match: mvp-builder
+    min: 1
+expected_outcome: A hypothesis with a numeric signal, scope cut to one flow with fakes and deferrals, and a concrete first step.

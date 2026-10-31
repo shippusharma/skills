@@ -1,0 +1,15 @@
+---
+name: csv_helper
+description: Helps with data.
+metadata:
+  version: 1.0
+  tags: [csv, data]
+---
+
+# CSV Helper
+
+This skill helps you with CSV files. CSV files are comma-separated values files that store tabular data, and they are very common in many different situations.
+
+You should always be careful when working with CSV files. Make sure the data is correct and that nothing goes wrong.
+
+When you work with CSV files, try to do a good job and follow best practices. Be thorough.

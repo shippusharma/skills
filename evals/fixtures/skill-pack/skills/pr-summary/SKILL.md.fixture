@@ -1,0 +1,10 @@
+---
+name: pr-summary
+description: 'Summarizes PRs.'
+license: MIT
+---
+
+# PR Summary
+
+1. Read the pull request diff and description.
+2. Write three bullets: what changed, why, and what reviewers should check first.

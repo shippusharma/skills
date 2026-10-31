@@ -1,0 +1,36 @@
+schema_version: '1.0'
+name: reviewer-review-weak-skill
+description: A pre-publish review of a skill with spec violations and a vague description.
+tags: [skill-quality-reviewer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: Review the skill in csv-helper/ before I publish it.
+  max_turns: 15
+  timeout_seconds: 300
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: invalid-name
+    criteria: >-
+      Reports that the skill name csv_helper is invalid because it has an underscore or doesn't
+      match its csv-helper folder.
+  - type: llm
+    name: non-string-metadata
+    criteria: >-
+      Reports that metadata values must be strings: the unquoted version 1.0 is read as a number,
+      or the tags value is a list.
+  - type: llm
+    name: not-ready
+    criteria: The response's verdict is that the csv-helper skill is not ready to publish.
+  - type: llm
+    name: replacement-description
+    criteria: Proposes replacement description text that names concrete CSV tasks and says when to use the skill.
+  - type: tool_used
+    name: fired-skill-quality-reviewer
+    tool: Skill
+    input_match: skill-quality-reviewer
+    min: 1
+expected_outcome: Not ready; the invalid name and non-string metadata fail the spec, and a concrete description is proposed.

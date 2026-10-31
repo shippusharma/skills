@@ -1,0 +1,34 @@
+schema_version: '1.0'
+name: repo-launch-review-cli
+description: A pre-launch review framed as "what will embarrass us".
+tags: [repo-impact-optimizer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: We're posting this on Hacker News next week. Go through the repo and tell me what will embarrass us.
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: catches-broken-install
+    criteria: 'The README installs `tidyjson`, but the package is named `tidy-json`, so the documented install command fails. The response points this out.'
+  - type: llm
+    name: catches-version-drift
+    criteria: >-
+      Notices that `--version` prints 0.3.0 while package.json says 0.4.0, or that CHANGELOG.md
+      stops at 0.2.0.
+  - type: llm
+    name: catches-license-gap
+    criteria: Notices that the README and package.json say MIT but the repo has no LICENSE file.
+  - type: llm
+    name: no-invented-facts
+    criteria: Doesn't claim anything the repo doesn't show, such as user counts, benchmarks, or features that don't exist.
+  - type: tool_used
+    name: fired-repo-impact-optimizer
+    tool: Skill
+    input_match: repo-impact-optimizer
+    min: 1
+expected_outcome: Finds the broken install, the version drift, and the missing LICENSE, without inventing facts.

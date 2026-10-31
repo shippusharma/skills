@@ -1,0 +1,33 @@
+schema_version: '1.0'
+name: mvp-not-fire-express-validation
+description: A plain coding question near the product space; the skill should stay out of it.
+tags: [mvp-builder, should-not-fire]
+execution:
+  prompt: >-
+    My Express signup route returns a 500 when the email field is missing from the body. How do
+    I return a 400 with a clear error message instead?
+  max_turns: 5
+  timeout_seconds: 120
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: answers-the-question
+    criteria: Gives Express code that checks the email field and responds with status 400 and an error message.
+  - type: llm
+    name: stays-on-task
+    criteria: Doesn't turn the answer into a product plan; no hypothesis, scope list, or MVP brief.
+  - type: regex
+    name: no-mvp-framing
+    pattern: 'We believe|\bhypothesis\b|\bDefer\b'
+    flags: i
+    match: not_contains
+    weight: 0.5
+  - type: tool_used
+    name: did-not-fire-mvp-builder
+    tool: Skill
+    input_match: mvp-builder
+    min: 0
+    max: 0
+expected_outcome: A direct Express fix with no MVP framing.

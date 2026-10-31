@@ -1,0 +1,32 @@
+schema_version: '1.0'
+name: blueprint-not-fire-monolith-question
+description: An architecture question that needs an answer, not a planning package.
+tags: [project-blueprint-builder, should-not-fire]
+execution:
+  prompt: >-
+    In two short paragraphs: when should an early-stage startup pick a modular monolith over
+    microservices?
+  max_turns: 5
+  timeout_seconds: 120
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: direct-answer
+    criteria: Answers in about two paragraphs with a clear recommendation and the conditions that would change it.
+  - type: llm
+    name: no-planning-package
+    criteria: Doesn't produce or offer a planning package; no PRD, TRD, phases, or document templates.
+  - type: regex
+    name: no-blueprint-terms
+    pattern: '\bPRD\b|\bTRD\b'
+    match: not_contains
+    weight: 0.5
+  - type: tool_used
+    name: did-not-fire-blueprint-builder
+    tool: Skill
+    input_match: project-blueprint-builder
+    min: 0
+    max: 0
+expected_outcome: A two-paragraph answer with no planning documents.

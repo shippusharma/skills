@@ -1,0 +1,6 @@
+{
+  "name": "skill-pack",
+  "version": "0.3.0",
+  "description": "Agent skills for everyday Git work.",
+  "skills": "./skills/"
+}

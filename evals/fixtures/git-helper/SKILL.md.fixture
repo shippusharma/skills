@@ -1,0 +1,21 @@
+---
+name: git-helper
+description: 'Use for anything involving code, files, the terminal, or projects. Helps developers be more productive.'
+license: MIT
+metadata:
+  version: '1.2.0'
+---
+
+# Git Helper
+
+## Workflow
+
+1. Run `git status` to see what changed.
+2. Group related changes and stage them with `git add -p`.
+3. Write a commit message in the imperative mood, under 72 characters.
+4. Before pushing, run `git log --oneline -5` to check the history.
+
+## Rules
+
+- Never force-push to `main`.
+- Never commit secrets or `.env` files.

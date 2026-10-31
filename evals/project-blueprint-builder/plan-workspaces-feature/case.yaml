@@ -1,0 +1,42 @@
+schema_version: '1.0'
+name: blueprint-plan-workspaces-feature
+description: A major feature in an existing codebase, with a data migration.
+tags: [project-blueprint-builder, should-fire, builds]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: >-
+    We need to add team workspaces to this notes app. A workspace has owners, members, and
+    viewers, and notes belong to a workspace instead of a single user. Write the plan in
+    blueprint/ before anyone codes: the data changes and how existing notes move over in
+    blueprint/SCHEMA.md, and the delivery order, including how to roll back the migration, in
+    blueprint/PHASES.md.
+  max_turns: 50
+  timeout_seconds: 1200
+  allowed_tools: [Read, Glob, Grep, Skill, Write, Edit]
+  disallowed_tools: [Bash, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: grounded-migration
+    focus: { source: file, path: blueprint/SCHEMA.md }
+    criteria: >-
+      This schema plan builds on existing users and notes tables (for example by replacing or
+      supplementing notes.user_id with a workspace reference) and explains how every existing
+      note ends up in a workspace.
+  - type: llm
+    name: roles-modelled
+    focus: { source: file, path: blueprint/SCHEMA.md }
+    criteria: Workspace membership is modelled with a role that is one of owner, member, or viewer.
+  - type: llm
+    name: reversible-migration
+    focus: { source: file, path: blueprint/PHASES.md }
+    criteria: >-
+      The data migration has its own phase with a rollback path, and every phase has exit
+      criteria that someone other than the author could check.
+  - type: tool_used
+    name: fired-blueprint-builder
+    tool: Skill
+    input_match: project-blueprint-builder
+    min: 1
+expected_outcome: The schema builds on users and notes with a per-note migration; the migration phase can be rolled back.

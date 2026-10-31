@@ -1,0 +1,68 @@
+---
+name: onboarding-checklist
+description: 'Runs the engineering onboarding checklist for a new hire. Use when someone asks to onboard a new engineer or set up a new team member.'
+license: MIT
+metadata:
+  version: '2.0.0'
+---
+
+# Onboarding Checklist
+
+## Overview
+
+This skill is designed to help you onboard new engineers to the team. Onboarding is one of the most important processes in any engineering organization, because a good onboarding experience helps new hires become productive quickly and feel welcome. A bad onboarding experience can lead to frustration and confusion. That is why it is important to follow this checklist carefully and completely.
+
+In this skill, you will create accounts, grant repository access, assign a buddy, schedule a setup session, and send the first-week plan. Each of these steps is described in detail below.
+
+## Why onboarding matters
+
+Onboarding matters because new engineers need access to tools, people, and information before they can contribute. Without access, they cannot read code. Without a buddy, they do not know who to ask. Without a setup session, they may spend days configuring their machine. Without a first-week plan, they may not know what to work on. This is why every step in this checklist matters.
+
+## Step-by-step instructions
+
+### Step 1: Create accounts
+
+Create the new hire's email and Slack accounts, and their GitHub account if they don't have one. Add their GitHub account to the `acme/engineering` team. This is important because without accounts the new hire cannot do anything.
+
+### Step 2: Grant repository access
+
+Open an access request in the #it-requests Slack channel with the new hire's GitHub username. This is important because repository access is required to read and change code.
+
+### Step 3: Assign an onboarding buddy
+
+Pair the new hire with an onboarding buddy from their own team. This is important because the buddy answers questions during the first weeks.
+
+### Step 4: Schedule the setup session
+
+Schedule a 30-minute setup session on the new hire's first day, where they run `make bootstrap` with their buddy. This is important because a working development environment is required to contribute.
+
+### Step 5: Send the first-week plan
+
+Send the new hire the first-week plan from `docs/first-week.md`. This is important because the plan tells them what to work on.
+
+## Summary of the steps
+
+To summarize, the steps are:
+
+1. Create accounts and add the new hire to `acme/engineering` on GitHub.
+2. Request repository access in #it-requests.
+3. Assign an onboarding buddy from their team.
+4. Schedule a 30-minute day-one session to run `make bootstrap`.
+5. Send `docs/first-week.md`.
+
+## Best practices
+
+- Be friendly and welcoming.
+- Be patient with the new hire.
+- Make sure nothing is forgotten.
+- Communicate clearly.
+- Follow up regularly.
+- Always follow the checklist.
+
+## Remember
+
+Remember to create accounts, grant repository access, assign a buddy, schedule the setup session, and send the first-week plan. Do not skip any step. Every step is important. If you skip a step, the new hire may have a bad experience.
+
+## Recap
+
+In this skill, you learned how to onboard a new engineer: create accounts, request access in #it-requests, assign a buddy, schedule the 30-minute setup session with `make bootstrap`, and send `docs/first-week.md`. Following this checklist ensures a smooth and successful onboarding experience for every new hire.

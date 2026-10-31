@@ -1,0 +1,35 @@
+schema_version: '1.0'
+name: mvp-hackathon-receipt-split
+description: A time-boxed demo where the risky part should be faked.
+tags: [mvp-builder, should-fire]
+execution:
+  prompt: >-
+    Hackathon starts in 36 hours. The idea: take a photo of a restaurant receipt and get a link
+    friends use to claim what they ate and see what they owe. What stack, and what do we build
+    first?
+  max_turns: 8
+  timeout_seconds: 180
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: one-stack
+    criteria: >-
+      Recommends one concrete stack (named tools or services) with its main tradeoff, rather than
+      a menu of options.
+  - type: llm
+    name: fake-the-hard-part
+    criteria: >-
+      Builds the claim-and-owe flow first and shortcuts the riskiest part for the demo, such as a
+      hosted OCR API, a pre-scanned sample receipt, or manual item entry, instead of building
+      receipt recognition from scratch.
+  - type: llm
+    name: demo-first-order
+    criteria: Gives a build order in which the end-to-end demo works before any polish.
+  - type: tool_used
+    name: fired-mvp-builder
+    tool: Skill
+    input_match: mvp-builder
+    min: 1
+expected_outcome: One stack, the claim flow first, and receipt recognition faked or outsourced.

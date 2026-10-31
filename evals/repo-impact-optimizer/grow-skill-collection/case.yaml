@@ -1,0 +1,31 @@
+schema_version: '1.0'
+name: repo-grow-skill-collection
+description: A skills collection with an unlisted skill, version drift, and a weak description.
+tags: [repo-impact-optimizer, should-fire]
+context:
+  scaffold_script: scaffold.sh
+execution:
+  prompt: How do I get more people installing the skills in this skill-pack repo?
+  max_turns: 30
+  timeout_seconds: 600
+  allowed_tools: [Read, Glob, Grep, Skill]
+  disallowed_tools: [Bash, Write, Edit, NotebookEdit]
+runs: 3
+graders:
+  - type: llm
+    name: unlisted-skill
+    criteria: Notices that changelog-writer exists in skills/ but isn't listed in the README.
+  - type: llm
+    name: version-drift
+    criteria: Notices that package.json (0.2.0) and .claude-plugin/plugin.json (0.3.0) disagree on the version.
+  - type: llm
+    name: weak-trigger
+    criteria: >-
+      Notices that pr-summary's description ("Summarizes PRs.") doesn't say when to use the skill,
+      so agents may not pick it.
+  - type: tool_used
+    name: fired-repo-impact-optimizer
+    tool: Skill
+    input_match: repo-impact-optimizer
+    min: 1
+expected_outcome: Finds the unlisted skill, the version drift, and the weak pr-summary description.
